@@ -45,10 +45,7 @@ app.get('/all_equipment',(req,res)=>{
       }
       if (result.length>0)
       {
-         res.send({
-            message: 'main info equipment',
-            data: result
-         });
+         res.send({message: 'main info equipment', data: result});
       }
    });
 });
@@ -71,37 +68,89 @@ app.get('/all_equipment/:id',(req,res)=>{
       }
       if(result.length>0)
       {
-         res.send({
-            message: 'single user data',
-            data: result
-         });
+         res.send({message: 'single equipment data', data: result});
       }
       else
       {
-         res.send({
+         res.send(
+             {
             message: 'data not found'
          });
       }
    });
+});
 
+//Вывод списка сотрудников
+//ФИО, отдел и филиал
+app.get('/staff',(req,res)=>{
+   let qr ='SELECT family_name, name, dad_name, name_department, name_rnu ' +
+       'FROM staff, departments, rnu' +
+       ' WHERE staff.id_department = departments.id AND staff.id_rnu = rnu.id';
 
-/*   let qr = 'SELECT name_type_equipment, name_manufacturer, model, serial_number, inventory_number, delivery_date ' +
-       'FROM all_equipment, type_of_equipment, manufacturer ' +
-       'WHERE all_equipment.id_type_of_equipment = type_of_equipment.id ' +
-       'AND all_equipment.id_manufacturer = manufacturer.id';
-
-   db.query (qr,(err,result)=>{
-      if (err){
-         console.log(err,'err');
-      }
-      if (result.length>0)
+   db.query(qr,(err,result)=>{
+      if(err)
       {
-         res.send({
-            message: 'main info equipment',
-            data: result
-         });
+         console.log(err,'errs');
       }
-   });*/
+      if(result.length>0)
+      {
+         res.send(
+         {message: 'single equipment data', data: result});
+      }
+      else {
+         res.send({message: 'data not found'});
+      }
+   });
+});
+
+//Вывод одного сотрудника по id
+//ФИО, отдел и филиал
+app.get('/staff/:id',(req,res)=>{
+
+   let gId = req.params.id;
+   let qr ='SELECT family_name, name, dad_name, name_department, name_rnu ' +
+       'FROM staff, departments, rnu' +
+       ' WHERE staff.id_department = departments.id AND staff.id_rnu = rnu.id AND staff.id = '+gId+'';
+
+   db.query(qr,(err,result)=>{
+      if(err)
+      {
+         console.log(err,'errs');
+      }
+      if(result.length>0)
+      {
+         res.send(
+             {message: 'single equipment data', data: result});
+      }
+      else {
+         res.send({message: 'data not found'});
+      }
+   });
+});
+
+//Вывод истории место нахождения движения оборудования.
+//ФИО, отдел и филиал
+app.get('/location_of_equipment',(req,res)=>{
+
+   let gId = req.params.id;
+   let qr ='SELECT family_name, name, dad_name, name_department, name_rnu ' +
+       'FROM staff, departments, rnu' +
+       ' WHERE staff.id_department = departments.id AND staff.id_rnu = rnu.id AND staff.id = '+gId+'';
+
+   db.query(qr,(err,result)=>{
+      if(err)
+      {
+         console.log(err,'errs');
+      }
+      if(result.length>0)
+      {
+         res.send(
+             {message: 'single equipment data', data: result});
+      }
+      else {
+         res.send({message: 'data not found'});
+      }
+   });
 });
 
 
