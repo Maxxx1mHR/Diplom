@@ -129,13 +129,18 @@ app.get('/staff/:id',(req,res)=>{
 });
 
 //Вывод истории место нахождения движения оборудования.
-//ФИО, отдел и филиал
+//Серийный норме (возможно не нужно), дата, операция, филиал, отдел, ФИО.
 app.get('/location_of_equipment',(req,res)=>{
 
    let gId = req.params.id;
-   let qr ='SELECT family_name, name, dad_name, name_department, name_rnu ' +
-       'FROM staff, departments, rnu' +
-       ' WHERE staff.id_department = departments.id AND staff.id_rnu = rnu.id AND staff.id = '+gId+'';
+   let qr = 'SELECT serial_number, date, name_operation, name_rnu, name_department, family_name, name, dad_name' +
+       ' FROM all_equipment, location_of_equipment, type_of_operation, staff, rnu, departments' +
+       ' WHERE all_equipment.id = location_of_equipment.id_all_equipment ' +
+       'AND location_of_equipment.id_type_of_operation = type_of_operation.id' +
+       ' AND location_of_equipment.id_staff = staff.id ' +
+       'AND staff.id_rnu =rnu.id ' +
+       'AND staff.id_department = departments.id ' +
+       'AND all_equipment.id = '+gId+'';
 
    db.query(qr,(err,result)=>{
       if(err)
@@ -152,8 +157,6 @@ app.get('/location_of_equipment',(req,res)=>{
       }
    });
 });
-
-
 
 
 app.listen(3000,()=>{
