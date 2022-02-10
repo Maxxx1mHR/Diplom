@@ -4,6 +4,7 @@
   <table class="table">
     <thead>
     <tr>
+      <th scope="col">id</th>
       <th scope="col">Тип</th>
       <th scope="col">Производитель</th>
       <th scope="col">Модель</th>
@@ -14,6 +15,8 @@
     </thead>
     <tbody>
     <tr *ngFor="let us of readData">
+      <a [routerLink]="['/read/' + us.id]" class="btn btn-info">123</a>
+      <th scope="row">{{us.id}}</th>
       <th scope="row">{{us.name_type_equipment}}</th>
       <th scope="row">{{us.name_manufacturer}}</th>
       <th scope="row">{{us.model}}</th>
@@ -22,8 +25,5 @@
       <th scope="row">{{us.delivery_date  | date: 'dd/MM/yyyy'}}</th>
     </tr>
     </tbody>
-
-
   </table>
-
 </div>

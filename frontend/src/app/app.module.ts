@@ -6,7 +6,7 @@ import { CreateComponent } from './create/create.component';
 import { ReadComponent } from './read/read.component';
 import {AppRoutingModule} from "./app-routing/app-routing.module";//Без этой фигни не выводились read work! и т.д.
 import {HttpClientModule} from "@angular/common/http";
-import {ApiserviceService} from "./apiservice.service";
+import {EquipmentserviceService} from "./service/equipmentservice.service";
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import {ApiserviceService} from "./apiservice.service";
     AppRoutingModule, //Это тоже нужно импортировать для read work!
     HttpClientModule
   ],
-  providers: [ApiserviceService],
+  providers: [EquipmentserviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

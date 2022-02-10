@@ -5,7 +5,7 @@ import {Observable} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class ApiserviceService {
+export class EquipmentserviceService {
 
   constructor(private _http: HttpClient) { }
 
@@ -15,6 +15,12 @@ export class ApiserviceService {
   getAllEquip():Observable<any>
   {
     return this._http.get(`${this.apiUrl}`);
+  }
+
+  getSingleEquip(id: any):Observable<any>
+  {
+    let ids = id;
+    return this._http.get(`${this.apiUrl}/${ids}`);
   }
 
 }

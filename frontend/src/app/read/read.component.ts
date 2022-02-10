@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ApiserviceService} from "../apiservice.service";
+import {EquipmentserviceService} from "../service/equipmentservice.service";
+import {combineAll} from "rxjs/operators";
 
 @Component({
   selector: 'app-read',
@@ -8,15 +9,29 @@ import {ApiserviceService} from "../apiservice.service";
 })
 export class ReadComponent implements OnInit {
 
-  constructor(private service: ApiserviceService) { }
+  constructor(private service: EquipmentserviceService) { }
 
   readData: any;
+  getparamid:any;
 
   ngOnInit(): void {
+    this.getAllEquip()
+  }
+
+  getAllEquip(){
     this.service.getAllEquip().subscribe((res)=>{
       console.log(res, "res==>");
       this.readData = res.data;
     });
   }
+
+  getSingleEquip(){
+    this.service.getSingleEquip(this.getparamid).subscribe((res)=>{
+      console.log(res,"res==>");
+      this.readData = res.data;
+    });
+  }
+
+
 
 }

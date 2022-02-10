@@ -34,7 +34,7 @@ db.connect(err=>{
 app.get('/all_equipment',(req,res)=>{
 
    //console.log('test');
-   let qr = 'SELECT name_type_equipment, name_manufacturer, model, serial_number, inventory_number, delivery_date ' +
+   let qr = 'SELECT all_equipment.id,name_type_equipment, name_manufacturer, model, serial_number, inventory_number, delivery_date ' +
        'FROM all_equipment, type_of_equipment, manufacturer ' +
        'WHERE all_equipment.id_type_of_equipment = type_of_equipment.id ' +
        'AND all_equipment.id_manufacturer = manufacturer.id';
