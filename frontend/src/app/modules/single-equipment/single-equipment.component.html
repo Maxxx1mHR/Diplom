@@ -1,0 +1,28 @@
+
+<div class="container mt-5">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Тип</th>
+      <th scope="col">Производитель</th>
+      <th scope="col">Модель</th>
+      <th scope="col">Инвентарный номер</th>
+      <th scope="col">Серийный номер</th>
+      <th scope="col">Дата поставки</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th scope="row">{{readData[0].id}}</th>
+      <th scope="row">{{readData[0].name_type_equipment}}</th>
+      <th scope="row">{{readData[0].name_manufacturer}}</th>
+      <th scope="row">{{readData[0].model}}</th>
+      <th scope="row">{{readData[0].inventory_number}}</th>
+      <th scope="row">{{readData[0].serial_number}}</th>
+      <th scope="row">{{readData[0].delivery_date  | date: 'dd/MM/yyyy'}}</th>
+    </tr>
+    </tbody>
+  </table>
+
+</div>

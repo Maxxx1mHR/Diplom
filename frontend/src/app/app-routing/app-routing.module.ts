@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
-import {CreateComponent} from "../create/create.component";
-import {ReadComponent} from "../read/read.component";
+import {CreateComponent} from "../modules/create/create.component";
+import {AllEquipmentComponent} from "../modules/all-equipment/all-equipment.component";
+import {SingleEquipmentComponent} from "../modules/single-equipment/single-equipment.component";
 
 const routes: Routes = [
   {path: 'create' ,component:CreateComponent},
-  {path: 'read', component:ReadComponent}
+  {path: 'all-equipment', component:AllEquipmentComponent},
+  {path: 'single-equipment/:id', component: SingleEquipmentComponent}
 ];
 
 

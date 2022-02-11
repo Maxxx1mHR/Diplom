@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReadComponent } from './read.component';
+import { SingleEquipmentComponent } from './single-equipment.component';
 
-describe('ReadComponent', () => {
-  let component: ReadComponent;
-  let fixture: ComponentFixture<ReadComponent>;
+describe('SingleEquipmentComponent', () => {
+  let component: SingleEquipmentComponent;
+  let fixture: ComponentFixture<SingleEquipmentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ReadComponent ]
+      declarations: [ SingleEquipmentComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReadComponent);
+    fixture = TestBed.createComponent(SingleEquipmentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

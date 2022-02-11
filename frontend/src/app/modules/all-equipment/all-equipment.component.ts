@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {EquipmentserviceService} from "../service/equipmentservice.service";
+import {EquipmentserviceService} from "../../service/equipmentservice.service";
 import {combineAll} from "rxjs/operators";
 
 @Component({
   selector: 'app-read',
-  templateUrl: './read.component.html',
-  styleUrls: ['./read.component.css']
+  templateUrl: './all-equipment.component.html',
+  styleUrls: ['./all-equipment.component.css']
 })
-export class ReadComponent implements OnInit {
+export class AllEquipmentComponent implements OnInit {
 
   constructor(private service: EquipmentserviceService) { }
 
   readData: any;
-  getparamid:any;
 
   ngOnInit(): void {
     this.getAllEquip()
@@ -25,12 +24,6 @@ export class ReadComponent implements OnInit {
     });
   }
 
-  getSingleEquip(){
-    this.service.getSingleEquip(this.getparamid).subscribe((res)=>{
-      console.log(res,"res==>");
-      this.readData = res.data;
-    });
-  }
 
 
 
