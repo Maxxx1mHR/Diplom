@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {EquipmentserviceService} from "../../service/equipmentservice.service";
 import {ActivatedRoute} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Observable} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-single-equipment',
@@ -27,5 +29,4 @@ export class SingleEquipmentComponent implements OnInit {
       this.readData = res.data;
     });
   }
-
 }

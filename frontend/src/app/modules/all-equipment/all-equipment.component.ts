@@ -24,7 +24,4 @@ export class AllEquipmentComponent implements OnInit {
     });
   }
 
-
-
-
 }

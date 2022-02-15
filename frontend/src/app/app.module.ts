@@ -8,6 +8,7 @@ import {AppRoutingModule} from "./app-routing/app-routing.module";//Без эт�
 import {HttpClientModule} from "@angular/common/http";
 import {EquipmentserviceService} from "./service/equipmentservice.service";
 import { SingleEquipmentComponent } from './modules/single-equipment/single-equipment.component';
+import { LocationEquipmentComponent } from './modules/location-equipment/location-equipment.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { SingleEquipmentComponent } from './modules/single-equipment/single-equi
     CreateComponent,
     AllEquipmentComponent,
     SingleEquipmentComponent,
+    LocationEquipmentComponent,
   ],
   imports: [
     BrowserModule,

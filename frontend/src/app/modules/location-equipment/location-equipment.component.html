@@ -1,0 +1,26 @@
+
+<div class="container mt-5">
+  <table class="table" >
+    <thead>
+    <tr>
+      <th scope="col">Серий</th>
+      <th scope="col">Дата</th>
+      <th scope="col">Производитель</th>
+      <th scope="col">Модель</th>
+      <th scope="col">Инвентарный номер</th>
+      <th scope="col">Серийный номер</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr id = "tr" *ngFor="let us of readData">
+      <th scope="row">{{us.serial_number}}</th>
+      <th scope="row">{{us.date}}</th>
+      <th scope="row">{{us.name_operation}}</th>
+      <th scope="row">{{us.family_name}}</th>
+      <th scope="row">{{us.name}}</th>
+      <th scope="row">{{us.dad_name}}</th>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -130,7 +130,7 @@ app.get('/staff/:id',(req,res)=>{
 
 //Вывод истории место нахождения движения оборудования.
 //Серийный норме (возможно не нужно), дата, операция, филиал, отдел, ФИО.
-app.get('/location_of_equipment',(req,res)=>{
+app.get('/location_of_equipment/:id',(req,res)=>{
 
    let gId = req.params.id;
    let qr = 'SELECT serial_number, date, name_operation, name_rnu, name_department, family_name, name, dad_name' +
