@@ -21,9 +21,15 @@ export class LocationEquipmentComponent implements OnInit {
 
 
   getLocationEquip() {
-    this.getparamid = this.router.snapshot.paramMap.get('id');
+    console.log(this.router.snapshot.parent?.params?.id)
+    // console.log(this.router.snapshot)
+    // console.log(this.router.snapshot.parent)
+    this.getparamid = this.router.snapshot.parent?.params?.id;
     this.service.getLocationEquip(this.getparamid).subscribe((res) => {
+      console.log(res,"res==>");
       this.readData = res.data;
     });
   }
+
 }
+

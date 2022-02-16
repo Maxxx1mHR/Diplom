@@ -133,7 +133,7 @@ app.get('/staff/:id',(req,res)=>{
 app.get('/location_of_equipment/:id',(req,res)=>{
 
    let gId = req.params.id;
-   let qr = 'SELECT serial_number, date, name_operation, name_rnu, name_department, family_name, name, dad_name' +
+   let qr = 'SELECT all_equipment.id, serial_number, date, name_operation, name_rnu, name_department, family_name, name, dad_name' +
        ' FROM all_equipment, location_of_equipment, type_of_operation, staff, rnu, departments' +
        ' WHERE all_equipment.id = location_of_equipment.id_all_equipment ' +
        'AND location_of_equipment.id_type_of_operation = type_of_operation.id' +
@@ -157,6 +157,31 @@ app.get('/location_of_equipment/:id',(req,res)=>{
       }
    });
 });
+
+app.get('/repair/:id',(req,res)=>{
+
+   let gId = req.params.id;
+   let qr = 'SELECT repair_date, price, type_of_work FROM repair_of_equipment, all_equipment ' +
+       'WHERE repair_of_equipment.id_all_equipment = all_equipment.id ' +
+       'AND repair_of_equipment.id_all_equipment = '+gId+'';
+
+   db.query(qr,(err,result)=>{
+      if(err)
+      {
+         console.log(err,'errs');
+      }
+      if(result.length>0)
+      {
+         res.send(
+             {message: 'repair equipment data', data: result});
+      }
+      else {
+         res.send({message: 'data not found'});
+      }
+   });
+});
+
+
 
 
 app.listen(3000,()=>{

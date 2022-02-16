@@ -4,10 +4,12 @@ import {CreateComponent} from "../modules/create/create.component";
 import {AllEquipmentComponent} from "../modules/all-equipment/all-equipment.component";
 import {SingleEquipmentComponent} from "../modules/single-equipment/single-equipment.component";
 import {LocationEquipmentComponent} from "../modules/location-equipment/location-equipment.component";
+import {RepairEquipmentComponent} from "../modules/repair-equipment/repair-equipment.component";
 
 
 const equipment: Routes = [
   {path: 'location', component: LocationEquipmentComponent},
+  {path: 'repair', component: RepairEquipmentComponent},
 ];
 
 
@@ -15,6 +17,7 @@ const routes: Routes = [
   {path: 'create' ,component:CreateComponent},
   {path: 'all-equipment', component:AllEquipmentComponent},
   {path: 'single-equipment/:id', component: SingleEquipmentComponent},
+  {path: 'single-equipment/:id', component: SingleEquipmentComponent, children: equipment},
   {path: 'single-equipment/:id', component: SingleEquipmentComponent, children: equipment},
 ];
 

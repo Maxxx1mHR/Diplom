@@ -1,1 +1,19 @@
-<p>repair-equipment works!</p>
+
+<div class="container mt-5">
+  <table class="table" >
+    <thead>
+    <tr>
+      <th scope="col">Дата</th>
+      <th scope="col">Стоимость</th>
+      <th scope="col">Что было сделано</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr id = "tr" *ngFor="let us of readData">
+      <td>{{us.repair_date | date: 'dd/MM/yyyy'}}</td>
+      <td>{{us.price}}</td>
+      <td>{{us.type_of_work}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -15,13 +15,13 @@
     <tbody>
 
     <tr id = "tr" *ngFor="let us of readData" [routerLink]="['/single-equipment/' + us.id]">
-      <th scope="row">{{us.id}}</th>
-      <th scope="row">{{us.name_type_equipment}}</th>
-      <th scope="row">{{us.name_manufacturer}}</th>
-      <th scope="row">{{us.model}}</th>
-      <th scope="row">{{us.inventory_number}}</th>
-      <th scope="row">{{us.serial_number}}</th>
-      <th scope="row">{{us.delivery_date  | date: 'dd/MM/yyyy'}}</th>
+      <td>{{us.id}}</td>
+      <td>{{us.name_type_equipment}}</td>
+      <td>{{us.name_manufacturer}}</td>
+      <td>{{us.model}}</td>
+      <td>{{us.inventory_number}}</td>
+      <td>{{us.serial_number}}</td>
+      <td>{{us.delivery_date  | date: 'dd/MM/yyyy'}}</td>
     </tr>
     </tbody>
   </table>

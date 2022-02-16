@@ -4,6 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
+import {delay} from "rxjs/operators";
 
 @Component({
   selector: 'app-single-equipment',
@@ -14,7 +15,7 @@ export class SingleEquipmentComponent implements OnInit {
 
   constructor(private service: EquipmentserviceService, private  router:ActivatedRoute) { }
 
-  readData: any;
+  readData: any[];
   getparamid:any;
 
   ngOnInit(): void {

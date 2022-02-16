@@ -1,5 +1,6 @@
-
-<div class="container mt-5">
+<p *ngIf="!readData"> Загрузка ... </p>
+<p *ngIf="readData?.length === 0"> Пустой список </p>
+<div *ngIf="readData?.length > 0" class="container mt-5">
   <table class="table">
     <thead>
     <tr>
@@ -14,26 +15,25 @@
     </thead>
     <tbody>
     <tr>
-      <th scope="row">{{readData[0].id}}</th>
-      <th scope="row">{{readData[0].name_type_equipment}}</th>
-      <th scope="row">{{readData[0].name_manufacturer}}</th>
-      <th scope="row">{{readData[0].model}}</th>
-      <th scope="row">{{readData[0].inventory_number}}</th>
-      <th scope="row">{{readData[0].serial_number}}</th>
-      <th scope="row">{{readData[0].delivery_date  | date: 'dd/MM/yyyy'}}</th>
+      <td>{{readData[0].id}}</td>
+      <td>{{readData[0].name_type_equipment}}</td>
+      <td>{{readData[0].name_manufacturer}}</td>
+      <td>{{readData[0].model}}</td>
+      <td>{{readData[0].inventory_number}}</td>
+      <td>{{readData[0].serial_number}}</td>
+      <td>{{readData[0].delivery_date  | date: 'dd/MM/yyyy'}}</td>
     </tr>
     </tbody>
   </table>
-
 
 
   <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown">
     Дополнительно
   </button>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" class="btn btn-primary" [routerLink]="['/single-equipment/' + readData[0].id + '/location']">История движения</a></li>
+    <li><a class="dropdown-item" [routerLink]="['/single-equipment/' + readData[0].id + '/location']">История движения</a></li>
     <li><a class="dropdown-item" href="#">Характеристики</a></li>
-    <li><a class="dropdown-item" href="#">Ремонт</a></li>
+    <li><a class="dropdown-item" [routerLink]="['/single-equipment/' + readData[0].id + '/repair']" >Ремонт</a></li>
   </ul>
 
   <router-outlet></router-outlet>

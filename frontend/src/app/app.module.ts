@@ -9,6 +9,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {EquipmentserviceService} from "./service/equipmentservice.service";
 import { SingleEquipmentComponent } from './modules/single-equipment/single-equipment.component';
 import { LocationEquipmentComponent } from './modules/location-equipment/location-equipment.component';
+import { RepairEquipmentComponent } from './modules/repair-equipment/repair-equipment.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { LocationEquipmentComponent } from './modules/location-equipment/locatio
     AllEquipmentComponent,
     SingleEquipmentComponent,
     LocationEquipmentComponent,
+    RepairEquipmentComponent,
   ],
   imports: [
     BrowserModule,

@@ -25,15 +25,20 @@ export class EquipmentserviceService {
 
 
   //Функция для вывода место нахождения оборудования
-  apiUrl1 = 'http://localhost:3000/location_of_equipment/'
+  apiUrl1 = 'http://localhost:3000/location_of_equipment'
   getLocationEquip(id: any): Observable<any>
   {
     let ids = id;
     return this._http.get(`${this.apiUrl1}/${ids}`);
   }
 
+  apiUrl2 = 'http://localhost:3000/repair'
 
-
+  getRepairEquip(id: any): Observable<any>
+  {
+    let ids = id;
+    return this._http.get(`${this.apiUrl2}/${ids}`);
+  }
 
 
 }

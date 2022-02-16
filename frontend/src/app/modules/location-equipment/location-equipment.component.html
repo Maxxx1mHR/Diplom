@@ -3,23 +3,24 @@
   <table class="table" >
     <thead>
     <tr>
-      <th scope="col">Серий</th>
       <th scope="col">Дата</th>
-      <th scope="col">Производитель</th>
-      <th scope="col">Модель</th>
-      <th scope="col">Инвентарный номер</th>
-      <th scope="col">Серийный номер</th>
+      <th scope="col">Тип операции</th>
+      <th scope="col">Филиал</th>
+      <th scope="col">Отдел</th>
+      <th scope="col">Фамилия</th>
+      <th scope="col">Имя</th>
+      <th scope="col">Отчество</th>
     </tr>
     </thead>
     <tbody>
-
     <tr id = "tr" *ngFor="let us of readData">
-      <th scope="row">{{us.serial_number}}</th>
-      <th scope="row">{{us.date}}</th>
-      <th scope="row">{{us.name_operation}}</th>
-      <th scope="row">{{us.family_name}}</th>
-      <th scope="row">{{us.name}}</th>
-      <th scope="row">{{us.dad_name}}</th>
+      <td>{{us.date  | date: 'dd/MM/yyyy'}}</td>
+      <td>{{us.name_operation}}</td>
+      <td>{{us.name_rnu}}</td>
+      <td>{{us.name_department}}</td>
+      <td>{{us.family_name}}</td>
+      <td>{{us.name}}</td>
+      <td>{{us.dad_name}}</td>
     </tr>
     </tbody>
   </table>
