@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {EquipmentserviceService} from "../../service/equipmentservice.service";
 import {ActivatedRoute} from "@angular/router";
 
+
 @Component({
   selector: 'app-location-equipment',
   templateUrl: './location-equipment.component.html',

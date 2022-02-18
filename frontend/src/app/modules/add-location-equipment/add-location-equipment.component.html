@@ -1,0 +1,29 @@
+<div class="container mt-5" *ngIf="operationList">
+  <h2>{{getparamid}}</h2>
+  <form [formGroup]="userForm">
+
+    <select>
+      <option *ngFor="let operation of operationList" [value]="operation.id"> {{operation.name}} </option>
+    </select>
+
+    <div class="col-lg-6 mt-2">
+      <input type="text" class="form-control" formControlName="fullname" placeholder="Enter Full Name">
+    </div>
+
+    <div class="col-lg-6 mt-2">
+      <input type="text" class="form-control" formControlName="email" placeholder="Enter Email">
+    </div>
+
+    <div class="col-lg-6 mt-2">
+      <input type="text" class="form-control" formControlName="mobil" placeholder="Enter Mobile Number">
+    </div>
+
+    <div class="col-lg-4 mt-2">
+      <!--      *ngIf="!getparamid"-->
+      <button class="btn btn-primary btn-sm">Create</button>
+    </div>
+
+  </form>
+
+
+</div>

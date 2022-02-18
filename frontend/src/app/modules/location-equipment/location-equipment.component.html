@@ -1,5 +1,6 @@
 
 <div class="container mt-5">
+  <h3>Журнал движения оборудования</h3>
   <table class="table" >
     <thead>
     <tr>
@@ -10,6 +11,8 @@
       <th scope="col">Фамилия</th>
       <th scope="col">Имя</th>
       <th scope="col">Отчество</th>
+      <th scope="col">Тест1</th>
+
     </tr>
     </thead>
     <tbody>
@@ -21,7 +24,14 @@
       <td>{{us.family_name}}</td>
       <td>{{us.name}}</td>
       <td>{{us.dad_name}}</td>
+
     </tr>
     </tbody>
   </table>
+
+
+  <a [routerLink]="['/add-location-equipment/'+ getparamid]" class="btn btn-success"> <i class="bi bi-plus-circle"></i>Добавить движение</a>
+
+
+
 </div>

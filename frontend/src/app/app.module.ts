@@ -10,6 +10,8 @@ import {EquipmentserviceService} from "./service/equipmentservice.service";
 import { SingleEquipmentComponent } from './modules/single-equipment/single-equipment.component';
 import { LocationEquipmentComponent } from './modules/location-equipment/location-equipment.component';
 import { RepairEquipmentComponent } from './modules/repair-equipment/repair-equipment.component';
+import { AddLocationEquipmentComponent } from './modules/add-location-equipment/add-location-equipment.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -19,12 +21,14 @@ import { RepairEquipmentComponent } from './modules/repair-equipment/repair-equi
     SingleEquipmentComponent,
     LocationEquipmentComponent,
     RepairEquipmentComponent,
+    AddLocationEquipmentComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule, //Это тоже нужно импортировать для all-equipment work!
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule, //Это тоже нужно импортировать для all-equipment work!
+        HttpClientModule,
+        ReactiveFormsModule
+    ],
   providers: [EquipmentserviceService],
   bootstrap: [AppComponent]
 })

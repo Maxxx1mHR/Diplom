@@ -15,6 +15,8 @@ export class SingleEquipmentComponent implements OnInit {
 
   constructor(private service: EquipmentserviceService, private  router:ActivatedRoute) { }
 
+  Test: string = 'Geeel';
+
   readData: any[];
   getparamid:any;
 
