@@ -1,26 +1,33 @@
-<div class="container mt-5" *ngIf="operationList">
-  <h2>{{getparamid}}</h2>
+<div class="container mt-5">
+
   <form [formGroup]="userForm">
 
-    <select>
+    <!--<select>
       <option *ngFor="let operation of operationList" [value]="operation.id"> {{operation.name}} </option>
     </select>
+    -->
 
     <div class="col-lg-6 mt-2">
-      <input type="text" class="form-control" formControlName="fullname" placeholder="Enter Full Name">
+      <input type="text" class="form-control" formControlName="id_manufacturer" placeholder="Дата возможно сделать текущую и не ставить в выбор">
+    </div>
+
+
+    <div class="col-lg-6 mt-2">
+      <select type="text" class="form-control" formControlName="id_type_of_equipment" placeholder="Тип">
+        <option value="" disabled selected>Выберите тип</option>
+        <option *ngFor="let us of readData"> {{us.name_operation}} </option>
+
+      <!--<input type="text" class="form-control" formControlName="id_type_of_equipment" placeholder="Тип">-->
+      </select>
     </div>
 
     <div class="col-lg-6 mt-2">
-      <input type="text" class="form-control" formControlName="email" placeholder="Enter Email">
-    </div>
-
-    <div class="col-lg-6 mt-2">
-      <input type="text" class="form-control" formControlName="mobil" placeholder="Enter Mobile Number">
+      <input type="text" class="form-control" formControlName="model" placeholder="Место установки">
     </div>
 
     <div class="col-lg-4 mt-2">
       <!--      *ngIf="!getparamid"-->
-      <button class="btn btn-primary btn-sm">Create</button>
+      <button class="btn btn-primary btn-sm">Добавить</button>
     </div>
 
   </form>

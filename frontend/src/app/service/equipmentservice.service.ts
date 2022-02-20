@@ -39,10 +39,17 @@ export class EquipmentserviceService {
     return this._http.get(`${this.apiUrl2}/${id}`);
   }
 
-  getOperationList(): Observable<any[]> {
+
+  //Для тест1
+/*  getOperationList(): Observable<any[]> {
     return of([1, 2, 3]
       .map(x => ({id: x, name: `Name ${x}`})))
       .pipe(delay(2000));
+  }*/
+  apiUrl3 = 'http://localhost:3000/type_of_operation'
+
+  getTypeOperation(): Observable<any>{
+    return this._http.get(this.apiUrl3);
   }
 
 

@@ -10,17 +10,17 @@ import {EquipmentserviceService} from "../../service/equipmentservice.service";
 })
 export class AddLocationEquipmentComponent implements OnInit {
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private api: EquipmentserviceService,
-  ) {
-  }
+  constructor(private router: ActivatedRoute, private service: EquipmentserviceService,) {}
 
   getparamid: any;
   operationList: any[];
+  readData: any;
+
 
   ngOnInit(): void {
-    this.getparamid = this.activatedRoute.snapshot.params.id;
+
+    //Для тест1
+/*    this.getparamid = this.activatedRoute.snapshot.params.id;
     console.log('operationList', this.operationList)
     this.api.getOperationList()
       .subscribe({
@@ -28,13 +28,34 @@ export class AddLocationEquipmentComponent implements OnInit {
           this.operationList = _items;
           console.log('operationList', this.operationList)
         }
-      })
+      })*/
+
+/*    this.service.getTypeEquip().subscribe({
+      next: _item =>{
+        this.readData = _item;
+        console.log(this.readData, 'Типы оборудования')
+      }
+    });*/
+    this.getTypeOparation()
+
   }
 
+  getTypeOparation(){
+    this.service.getTypeOperation().subscribe((res)=>
+    {
+      console.log(res, "Типы оборудования");
+      this.readData = res.data;
+    });
+  }
+
+
   userForm: FormGroup = new FormGroup({
-    'fullname': new FormControl('', Validators.required),
-    'email': new FormControl('', Validators.required),
-    'mobil': new FormControl('', Validators.required)
+    'id_type_of_equipment': new FormControl('', Validators.required),
+    'id_manufacturer': new FormControl('', Validators.required),
+    'model': new FormControl('', Validators.required),
+    'serial_number': new FormControl('', Validators.required),
+    'inventory_number': new FormControl('', Validators.required),
+    'delivery_date': new FormControl('', Validators.required),
   });
 
 }

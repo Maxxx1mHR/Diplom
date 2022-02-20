@@ -181,6 +181,22 @@ app.get('/repair/:id',(req,res)=>{
    });
 });
 
+app.get('/type_of_operation',(req,res)=>{
+
+   let qr = 'SELECT name_operation FROM type_of_operation'
+
+   db.query (qr,(err,result)=>{
+      if (err){
+         console.log(err,'err');
+      }
+      if (result.length>0)
+      {
+         res.send({message: 'main info equipment', data: result});
+      }
+   });
+});
+
+
 
 
 
