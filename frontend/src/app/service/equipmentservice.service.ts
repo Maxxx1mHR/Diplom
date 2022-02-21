@@ -52,6 +52,12 @@ export class EquipmentserviceService {
     return this._http.get(this.apiUrl3);
   }
 
+  apiUrl4 = 'http://localhost:3000/staff'
+
+  getStaff(): Observable<any>{
+    return this._http.get(this.apiUrl4);
+  }
+
 
 }
 

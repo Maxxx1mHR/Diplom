@@ -8,21 +8,29 @@
     -->
 
     <div class="col-lg-6 mt-2">
-      <input type="text" class="form-control" formControlName="id_manufacturer" placeholder="Дата возможно сделать текущую и не ставить в выбор">
+      <input type="date" class="form-control" formControlName="date"
+             placeholder="Дата возможно сделать текущую и не ставить в выбор">
     </div>
 
 
     <div class="col-lg-6 mt-2">
-      <select type="text" class="form-control" formControlName="id_type_of_equipment" placeholder="Тип">
+      <select type="text" class="form-control" formControlName="id_type_of_operation" placeholder="Тип">
         <option value="" disabled selected>Выберите тип</option>
         <option *ngFor="let us of readData"> {{us.name_operation}} </option>
 
-      <!--<input type="text" class="form-control" formControlName="id_type_of_equipment" placeholder="Тип">-->
+        <!--<input type="text" class="form-control" formControlName="id_type_of_equipment" placeholder="Тип">-->
       </select>
     </div>
 
     <div class="col-lg-6 mt-2">
-      <input type="text" class="form-control" formControlName="model" placeholder="Место установки">
+      <select type="text" class="form-control" formControlName="id_staff" placeholder="Кому поставили">
+        <option value="" disabled selected>Выберите тип</option>
+        <option *ngFor="let us of readData1"> {{us.family_name}}
+          {{us.name}}
+          {{us.dad_name}}
+          {{us.name_department}}
+          {{us.name_rnu}}</option>
+      </select>
     </div>
 
     <div class="col-lg-4 mt-2">

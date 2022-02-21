@@ -27,7 +27,7 @@ import {ReactiveFormsModule} from "@angular/forms";
         BrowserModule,
         AppRoutingModule, //Это тоже нужно импортировать для all-equipment work!
         HttpClientModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
     ],
   providers: [EquipmentserviceService],
   bootstrap: [AppComponent]
