@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EquipmentserviceService} from "../../service/equipmentservice.service";
+import { Select2OptionData } from 'ng-select2';
+import { Options } from 'select2';
 
 
 @Component({
@@ -20,6 +22,9 @@ export class AddLocationEquipmentComponent implements OnInit {
   readData: any;
   readData1: any;
 
+
+  public exampleData: Array<Select2OptionData>;
+  public options: Options;
 
   ngOnInit(): void {
 
@@ -42,6 +47,32 @@ export class AddLocationEquipmentComponent implements OnInit {
         });*/
     this.getTypeOparation()
     this.getStaff()
+
+
+    this.exampleData = [
+      {
+        id: 'opt1',
+        text: 'Options 1'
+      },
+      {
+        id: 'opt2',
+        text: 'Options 2'
+      },
+      {
+        id: 'opt3',
+        text: 'Options 3'
+      },
+      {
+        id: 'opt4',
+        text: 'Options 4'
+      }
+    ];
+
+    this.options = {
+      multiple: true,
+      closeOnSelect: false,
+      width: '300'
+    };
 
   }
 

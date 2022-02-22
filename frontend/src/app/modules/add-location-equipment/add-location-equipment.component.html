@@ -23,21 +23,20 @@
     </div>
 
     <div class="col-lg-6 mt-2">
-      <select type="text" class="form-control" formControlName="id_staff" placeholder="Кому поставили">
+      <ng-select2 type="text" class="form-control" formControlName="id_staff" placeholder="Кому поставили">
         <option value="" disabled selected>Выберите тип</option>
-        <option *ngFor="let us of readData1"> {{us.family_name}}
+        <option placeholder="'Demo with options'" *ngFor="let us of readData1"> {{us.family_name}}
           {{us.name}}
           {{us.dad_name}}
           {{us.name_department}}
           {{us.name_rnu}}</option>
-      </select>
+      </ng-select2>
     </div>
 
     <div class="col-lg-4 mt-2">
       <!--      *ngIf="!getparamid"-->
       <button class="btn btn-primary btn-sm">Добавить</button>
     </div>
-
   </form>
 
 
