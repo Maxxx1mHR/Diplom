@@ -48,32 +48,6 @@ export class AddLocationEquipmentComponent implements OnInit {
     this.getTypeOparation()
     this.getStaff()
 
-
-    this.exampleData = [
-      {
-        id: 'opt1',
-        text: 'Options 1'
-      },
-      {
-        id: 'opt2',
-        text: 'Options 2'
-      },
-      {
-        id: 'opt3',
-        text: 'Options 3'
-      },
-      {
-        id: 'opt4',
-        text: 'Options 4'
-      }
-    ];
-
-    this.options = {
-      multiple: true,
-      closeOnSelect: false,
-      width: '300'
-    };
-
   }
 
 
@@ -91,7 +65,7 @@ export class AddLocationEquipmentComponent implements OnInit {
   }
 
 
-  userForm: FormGroup = new FormGroup({
+  LocationForm: FormGroup = new FormGroup({
     'date': new FormControl('', Validators.required),
     'id_type_of_operation': new FormControl('', Validators.required),
     'id_staff': new FormControl('', Validators.required),
