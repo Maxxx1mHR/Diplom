@@ -1,11 +1,14 @@
 <div class="container mt-5">
 
+  <h1>{{getparamid}}</h1>
+
   <form [formGroup]="LocationForm">
 
     <!--<select>
       <option *ngFor="let operation of operationList" [value]="operation.id"> {{operation.name}} </option>
     </select>
     -->
+
 
     <div class="col-lg-6 mt-2">
       <input type="date" class="form-control" formControlName="date"

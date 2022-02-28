@@ -28,6 +28,8 @@ export class AddLocationEquipmentComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.getparamid = this.router.snapshot.params.id;
+
     //Для тест1
     /*    this.getparamid = this.activatedRoute.snapshot.params.id;
         console.log('operationList', this.operationList)
@@ -37,7 +39,7 @@ export class AddLocationEquipmentComponent implements OnInit {
               this.operationList = _items;
               console.log('operationList', this.operationList)
             }
-          })*/
+          })
 
     /*    this.service.getTypeEquip().subscribe({
           next: _item =>{
@@ -45,6 +47,7 @@ export class AddLocationEquipmentComponent implements OnInit {
             console.log(this.readData, 'Типы оборудования')
           }
         });*/
+
     this.getTypeOparation()
     this.getStaff()
 

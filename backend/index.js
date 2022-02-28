@@ -3,6 +3,7 @@ const bodyparser = require('body-parser');
 const cors = require('cors');
 
 const mysql = require('mysql2');
+const {router} = require("express/lib/application");
 
 const app = express();
 
@@ -55,6 +56,7 @@ app.get('/all_equipment',(req,res)=>{
 app.get('/all_equipment/:id',(req,res)=>{
 
    //console.log(req.params.id,'get single data');
+
    let gId = req.params.id;
    let qr = 'SELECT all_equipment.id, name_type_equipment, name_manufacturer, model, serial_number, inventory_number, delivery_date ' +
        'FROM all_equipment, type_of_equipment, manufacturer ' +
@@ -194,6 +196,28 @@ app.get('/type_of_operation',(req,res)=>{
          res.send({message: 'main info equipment', data: result});
       }
    });
+});
+
+app.post('/add-location-equipment:id',(req,res)=>{
+
+   console.log(req.body,'updatedata');
+   let gId = req.params.id;
+   let date = req.body.date;
+   let id_type_of_operation = req.body.id_type_of_operation;
+   let id_staff = req.body.id_staff;
+   let id_all_equipment = '1';
+
+   let qr = `INSERT INTO location_of_equipment (date, id_type_of_operation, id_staff, id_all_equipment) VALUES ('${date}','${id_type_of_operation}','${id_staff},'${gId}')`;
+   db.query(qr,(err,result)=> {
+      if(err) {
+         console.log(err,'errs');
+      }
+      console.log(result,'result')
+      res.send({
+         message: 'insert location of equipment',
+      });
+   });
+
 });
 
 
