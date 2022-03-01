@@ -11,6 +11,8 @@ const app = express();
 app.use (cors());
 app.use (bodyparser.json());
 
+// создаем парсер для данных в формате json ТЕСТ
+const jsonParser = express.json();
 
 
 //database connection
@@ -85,7 +87,7 @@ app.get('/all_equipment/:id',(req,res)=>{
 //Вывод списка сотрудников
 //ФИО, отдел и филиал
 app.get('/staff',(req,res)=>{
-   let qr ='SELECT family_name, name, dad_name, name_department, name_rnu ' +
+   let qr ='SELECT staff.id, family_name, name, dad_name, name_department, name_rnu ' +
        'FROM staff, departments, rnu' +
        ' WHERE staff.id_department = departments.id AND staff.id_rnu = rnu.id';
 
@@ -185,7 +187,7 @@ app.get('/repair/:id',(req,res)=>{
 
 app.get('/type_of_operation',(req,res)=>{
 
-   let qr = 'SELECT name_operation FROM type_of_operation'
+   let qr = 'SELECT id, name_operation FROM type_of_operation'
 
    db.query (qr,(err,result)=>{
       if (err){
@@ -198,16 +200,17 @@ app.get('/type_of_operation',(req,res)=>{
    });
 });
 
-app.post('/add-location-equipment:id',(req,res)=>{
+
+app.post('/add-location-equipment/:id',(req,res)=>{
 
    console.log(req.body,'updatedata');
    let gId = req.params.id;
    let date = req.body.date;
    let id_type_of_operation = req.body.id_type_of_operation;
    let id_staff = req.body.id_staff;
-   let id_all_equipment = '1';
 
-   let qr = `INSERT INTO location_of_equipment (date, id_type_of_operation, id_staff, id_all_equipment) VALUES ('${date}','${id_type_of_operation}','${id_staff},'${gId}')`;
+
+   let qr = `INSERT INTO location_of_equipment (date, id_type_of_operation, id_staff, id_all_equipment) VALUES ('${date}','${id_type_of_operation}','${id_staff}','${gId}')`;
    db.query(qr,(err,result)=> {
       if(err) {
          console.log(err,'errs');
@@ -219,7 +222,6 @@ app.post('/add-location-equipment:id',(req,res)=>{
    });
 
 });
-
 
 
 

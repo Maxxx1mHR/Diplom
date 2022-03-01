@@ -11,8 +11,8 @@ import {SingleEquipmentComponent} from './modules/single-equipment/single-equipm
 import {LocationEquipmentComponent} from './modules/location-equipment/location-equipment.component';
 import {RepairEquipmentComponent} from './modules/repair-equipment/repair-equipment.component';
 import {AddLocationEquipmentComponent} from './modules/add-location-equipment/add-location-equipment.component';
-import {ReactiveFormsModule} from "@angular/forms";
-import {NgSelect2Module} from 'ng-select2'
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NgSelect2Module} from 'ng-select2';
 
 
 @NgModule({
@@ -24,6 +24,7 @@ import {NgSelect2Module} from 'ng-select2'
     LocationEquipmentComponent,
     RepairEquipmentComponent,
     AddLocationEquipmentComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -31,6 +32,7 @@ import {NgSelect2Module} from 'ng-select2'
     HttpClientModule,
     ReactiveFormsModule,
     NgSelect2Module,
+    FormsModule,
   ],
   providers: [EquipmentserviceService],
   bootstrap: [AppComponent]

@@ -1,7 +1,5 @@
 <div class="container mt-5">
 
-  <h1>{{getparamid}}</h1>
-
   <form [formGroup]="LocationForm">
 
     <!--<select>
@@ -9,17 +7,17 @@
     </select>
     -->
 
-
     <div class="col-lg-6 mt-2">
       <input type="date" class="form-control" formControlName="date"
              placeholder="Дата возможно сделать текущую и не ставить в выбор">
     </div>
 
-
     <div class="col-lg-6 mt-2">
       <select type="text" class="form-control" formControlName="id_type_of_operation" placeholder="Тип">
         <option value="" disabled selected>Выберите тип</option>
-        <option *ngFor="let us of readData"> {{us.name_operation}} </option>
+        <option *ngFor="let us of readData" [value]="us.id">
+          {{us.name_operation}}
+        </option>
 
         <!--<input type="text" class="form-control" formControlName="id_type_of_equipment" placeholder="Тип">-->
       </select>
@@ -29,7 +27,7 @@
       <ng-select2 type="text" class="form-control" formControlName="id_staff" placeholder="Кому поставили">
         <option value="" disabled selected>Выберите тип</option>
 
-        <option placeholder="'Demo with options'" *ngFor="let us of readData1">
+        <option placeholder="'Demo with options'" *ngFor="let us of readData1" [value]="us.id">
 
           {{us.family_name}}
           {{us.name}}
@@ -42,11 +40,10 @@
       </ng-select2>
     </div>
 
-
-    <div class="col-lg-4 mt-2">
-      <!--      *ngIf="!getparamid"-->
-      <button class="btn btn-primary btn-sm">Добавить</button>
+    <div class="col-lg-4 mt-2" (click)="createLocationEquip()">
+      <button class="btn btn-primary btn-sm" [routerLink]="['/single-equipment/'+getparamid+'/location']">Добавить</button>
     </div>
+
   </form>
 
 

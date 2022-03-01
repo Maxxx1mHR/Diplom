@@ -58,10 +58,13 @@ export class EquipmentserviceService {
     return this._http.get(this.apiUrl4);
   }
 
+  apiUrl5 = 'http://localhost:3000/add-location-equipment'
 
+  //Добавить новое мест установки оборудования
 
-
-
+  CreateLocationEquipment (data: any, id: any): Observable<any>{
+    return this._http.post(`${this.apiUrl5}/${id}`, data);
+  }
 
 }
 
