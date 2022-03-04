@@ -15,7 +15,7 @@ app.use (bodyparser.json());
 const jsonParser = express.json();
 
 
-//database connection
+//Соединение с базой данных
 
 const db = mysql.createConnection({
    host: 'localhost',
@@ -25,7 +25,7 @@ const db = mysql.createConnection({
    port: 3306
 });
 
-//check database connection
+//Проверка соединения с базой данных
 db.connect(err=>{
    if(err){console.log(err,'database err');}
    console.log('database successful connect...');
@@ -162,6 +162,8 @@ app.get('/location_of_equipment/:id',(req,res)=>{
    });
 });
 
+//Вывод истории ремонта оборудования
+//Дата ремонта, цена, что было сделано
 app.get('/repair/:id',(req,res)=>{
 
    let gId = req.params.id;
@@ -185,6 +187,7 @@ app.get('/repair/:id',(req,res)=>{
    });
 });
 
+//Вывод типа операции перемещения
 app.get('/type_of_operation',(req,res)=>{
 
    let qr = 'SELECT id, name_operation FROM type_of_operation'
@@ -200,7 +203,7 @@ app.get('/type_of_operation',(req,res)=>{
    });
 });
 
-
+//Добавление нового место нахождения оборудования
 app.post('/add-location-equipment/:id',(req,res)=>{
 
    console.log(req.body,'updatedata');
@@ -208,7 +211,6 @@ app.post('/add-location-equipment/:id',(req,res)=>{
    let date = req.body.date;
    let id_type_of_operation = req.body.id_type_of_operation;
    let id_staff = req.body.id_staff;
-
 
    let qr = `INSERT INTO location_of_equipment (date, id_type_of_operation, id_staff, id_all_equipment) VALUES ('${date}','${id_type_of_operation}','${id_staff}','${gId}')`;
    db.query(qr,(err,result)=> {
@@ -220,7 +222,26 @@ app.post('/add-location-equipment/:id',(req,res)=>{
          message: 'insert location of equipment',
       });
    });
+});
 
+app.post('/add-repair-equipment/:id',(req,res)=>{
+
+   console.log(req.body,'updatedata');
+   let gId = req.params.id;
+   let repair_date = req.body.repair_date;
+   let price = req.body.price;
+   let type_of_work = req.body.type_of_work;
+
+   let qr = `INSERT INTO repair_of_equipment (repair_date, price, type_of_work, id_all_equipment) VALUES ('${repair_date}','${price}','${type_of_work}','${gId}')`;
+   db.query(qr,(err,result)=> {
+      if(err) {
+         console.log(err,'errs');
+      }
+      console.log(result,'result')
+      res.send({
+         message: 'insert repair of equipment',
+      });
+   });
 });
 
 

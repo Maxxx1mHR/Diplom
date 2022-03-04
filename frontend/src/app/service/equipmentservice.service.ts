@@ -13,32 +13,28 @@ export class EquipmentserviceService {
 
   apiUrl = 'http://localhost:3000/all_equipment'
 
-  //функция вывода информации об оборудовании
+  //функция вывода информации об всем оборудовании
   getAllEquip(): Observable<any> {
-    return this._http.get(`${this.apiUrl}`);
+    return this._http.get('http://localhost:3000/all_equipment');
   }
 
+  //Функция вывода одного экземпляра оборудования
   getSingleEquip(id: any): Observable<any> {
     let ids = id;
-    return this._http.get(`${this.apiUrl}/${ids}`);
+    return this._http.get('http://localhost:3000/all_equipment'+`/${ids}`);
   }
-
 
   //Функция для вывода место нахождения оборудования
-  apiUrl1 = 'http://localhost:3000/location_of_equipment'
-
   getLocationEquip(id: any): Observable<any> {
     let ids = id;
-    return this._http.get(`${this.apiUrl1}/${ids}`);
+    return this._http.get('http://localhost:3000/location_of_equipment'+`/${ids}`);
   }
 
-  apiUrl2 = 'http://localhost:3000/repair'
-
+  //Вывод информации о ремонте оборудования по id.
   getRepairEquip(id: any): Observable<any> {
     // let ids = id;
-    return this._http.get(`${this.apiUrl2}/${id}`);
+    return this._http.get('http://localhost:3000/repair'+`/${id}`);
   }
-
 
   //Для тест1
 /*  getOperationList(): Observable<any[]> {
@@ -46,25 +42,29 @@ export class EquipmentserviceService {
       .map(x => ({id: x, name: `Name ${x}`})))
       .pipe(delay(2000));
   }*/
-  apiUrl3 = 'http://localhost:3000/type_of_operation'
 
+  //Вывод информации о типе перемещения оборудования
   getTypeOperation(): Observable<any>{
-    return this._http.get(this.apiUrl3);
+    return this._http.get('http://localhost:3000/type_of_operation');
   }
 
-  apiUrl4 = 'http://localhost:3000/staff'
-
+  //Вывод пользователей, отдела и филиала
   getStaff(): Observable<any>{
-    return this._http.get(this.apiUrl4);
+    return this._http.get('http://localhost:3000/staff');
   }
 
-  apiUrl5 = 'http://localhost:3000/add-location-equipment'
-
-  //Добавить новое мест установки оборудования
-
+  //Post. Добавить информацию о месте нахождения оборудования
   CreateLocationEquipment (data: any, id: any): Observable<any>{
-    return this._http.post(`${this.apiUrl5}/${id}`, data);
+    return this._http.post('http://localhost:3000/add-location-equipment'+`/${id}`, data);
   }
+
+  //Post. Добавить информацию о ремонте
+  CreateRepairEquip (data: any, id: any): Observable<any>{
+    return this._http.post('http://localhost:3000/add-repair-equipment/'+`${id}`, data);
+  }
+
+
+
 
 }
 

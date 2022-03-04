@@ -13,6 +13,7 @@ import {RepairEquipmentComponent} from './modules/repair-equipment/repair-equipm
 import {AddLocationEquipmentComponent} from './modules/add-location-equipment/add-location-equipment.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgSelect2Module} from 'ng-select2';
+import { AddRepairEquipmentComponent } from './modules/add-repair-equipment/add-repair-equipment.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import {NgSelect2Module} from 'ng-select2';
     LocationEquipmentComponent,
     RepairEquipmentComponent,
     AddLocationEquipmentComponent,
+    AddRepairEquipmentComponent,
 
   ],
   imports: [

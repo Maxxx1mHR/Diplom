@@ -7,6 +7,7 @@
     </select>
     -->
 
+
     <div class="col-lg-6 mt-2">
       <input type="date" class="form-control" formControlName="date"
              placeholder="Дата возможно сделать текущую и не ставить в выбор">
@@ -26,17 +27,13 @@
     <div class="col-lg-6 mt-2">
       <ng-select2 type="text" class="form-control" formControlName="id_staff" placeholder="Кому поставили">
         <option value="" disabled selected>Выберите тип</option>
-
         <option placeholder="'Demo with options'" *ngFor="let us of readData1" [value]="us.id">
-
           {{us.family_name}}
           {{us.name}}
           {{us.dad_name}}
           {{us.name_department}}
           {{us.name_rnu}}
-
         </option>
-
       </ng-select2>
     </div>
 

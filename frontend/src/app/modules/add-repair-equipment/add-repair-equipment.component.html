@@ -1,0 +1,28 @@
+<div class="container mt-5">
+
+  <h4>Добавление записи о ремонте</h4>
+  <form [formGroup]="RepairEquip">
+
+    <div class="col-lg-6 mt-2">
+      <input type="date" name="repair_date" class="form-control" formControlName="repair_date"
+             placeholder="Дата возможно сделать текущую и не ставить в выбор">
+    </div>
+
+    <div class="col-lg-6 mt-2">
+      <input type="text" class="form-control" formControlName="price"
+      placeholder="Стоимость ремонта">
+    </div>
+
+    <div class="col-lg-6 mt-2">
+      <input type="text" class="form-control" formControlName="type_of_work"
+      placeholder="Что было сделано">
+    </div>
+
+    <div class="col-lg-4 mt-2" (click)="CreateRepairEquip()">
+      <button class="btn btn-primary">Добавить</button>
+    </div>
+
+  </form>
+
+
+</div>

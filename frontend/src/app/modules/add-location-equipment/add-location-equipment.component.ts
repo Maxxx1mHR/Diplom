@@ -14,7 +14,7 @@ import {Options} from 'select2';
 export class AddLocationEquipmentComponent implements OnInit {
 
 
-  constructor(private router: ActivatedRoute, private service: EquipmentserviceService,) {
+  constructor(private router: ActivatedRoute, private service: EquipmentserviceService) {
   }
 
 
