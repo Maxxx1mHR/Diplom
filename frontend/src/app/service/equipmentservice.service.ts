@@ -63,6 +63,10 @@ export class EquipmentserviceService {
     return this._http.post('http://localhost:3000/add-repair-equipment/'+`${id}`, data);
   }
 
+  GalaxyGetAllEquip(): Observable<any>{
+    return this._http.get('http://localhost:8080/galaxy_all_equipment');
+  }
+
 
 
 

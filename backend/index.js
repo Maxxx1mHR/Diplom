@@ -2,21 +2,26 @@ const express = require('express');
 const bodyparser = require('body-parser');
 const cors = require('cors');
 
+
 const mysql = require('mysql2');
-const {router} = require("express/lib/application");
+const mssql = require('mssql');
+const {compileETag} = require("express/lib/utils");
+
+//const {router} = require("express/lib/application");
 
 const app = express();
-
-
 app.use (cors());
 app.use (bodyparser.json());
 
+const appGalaxy = express();
+appGalaxy.use(cors());
+appGalaxy.use(bodyparser.json());
+
 // создаем парсер для данных в формате json ТЕСТ
-const jsonParser = express.json();
+//const jsonParser = express.json();
 
 
 //Соединение с базой данных
-
 const db = mysql.createConnection({
    host: 'localhost',
    user: 'root',
@@ -25,11 +30,67 @@ const db = mysql.createConnection({
    port: 3306
 });
 
+const dbGalaxy = new mssql.ConnectionPool({
+   server: 'localhost',
+   user: 'user1',
+   password: 'sa',
+   database: 'galaxy',
+   port: 1433,
+   trustServerCertificate: true,
+})
+
+
+
 //Проверка соединения с базой данных
 db.connect(err=>{
-   if(err){console.log(err,'database err');}
-   console.log('database successful connect...');
-})
+   if(err)
+   {
+      console.log(err,'Соединеие с MySQL не удалось, ошибка');
+   }
+   else
+   {
+      console.log('Соединеие с MySQL успешно установлено...');
+   }
+});
+
+//Проверка соединеиня с Галактикой
+
+dbGalaxy.connect(err=>{
+   if(err)
+   {
+      console.log(err,'Соединеие с Галактикой не удалось, ошибка');
+   }
+   else
+   {
+      console.log('Соединение c Галактикой успешно установлено');
+   }
+});
+
+appGalaxy.get("/galaxy_all_equipment", function(req , res){
+
+   dbGalaxy.connect().then(function () {
+      var request = new mssql.Request(dbGalaxy);
+      request.query("select * from all_equipment").then(function (resp) {
+         res.send({
+            message: 'all user data',
+            data: resp
+         });
+         console.log(resp);
+         dbGalaxy.close();
+      }).catch(function (err) {
+         console.log(err);
+         dbGalaxy.close();
+      });
+   }).catch(function (err) {
+      console.log(err);
+   });
+});
+
+
+
+
+
+
 
 //Вывод основной информаци об оборудовании:
 //Тип, производитель, модель, сериный, инвентарный, дата поставки.
@@ -246,12 +307,11 @@ app.post('/add-repair-equipment/:id',(req,res)=>{
 
 
 
-
-
-
-
-
-
 app.listen(3000,()=>{
-   console.log('server running');
+   console.log('server MySQL work');
 })
+
+appGalaxy.listen(8080,()=>{
+   console.log('server Galaxy work');
+})
+

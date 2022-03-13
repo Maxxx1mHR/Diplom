@@ -12,16 +12,28 @@ export class AllEquipmentComponent implements OnInit {
   constructor(private service: EquipmentserviceService) { }
 
   readData: any;
+  readData2: any;
 
   ngOnInit(): void {
-    this.getAllEquip()
+    this.getAllEquip();
+    this.getGalaxyEquip();
   }
+
+
+
 
   getAllEquip(){
     this.service.getAllEquip().subscribe((res)=>{
       console.log(res, "res==>");
       this.readData = res.data;
     });
+  }
+
+  getGalaxyEquip(){
+    this.service.GalaxyGetAllEquip().subscribe((res)=>{
+      console.log(res, "res===>");
+      this.readData2 = res.data.recordset;
+    })
   }
 
 }
