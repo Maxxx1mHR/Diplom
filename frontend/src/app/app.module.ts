@@ -14,6 +14,9 @@ import {AddLocationEquipmentComponent} from './modules/add-location-equipment/ad
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgSelect2Module} from 'ng-select2';
 import { AddRepairEquipmentComponent } from './modules/add-repair-equipment/add-repair-equipment.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -35,6 +38,9 @@ import { AddRepairEquipmentComponent } from './modules/add-repair-equipment/add-
     ReactiveFormsModule,
     NgSelect2Module,
     FormsModule,
+    NgbModule,
+    NgbPaginationModule,
+    NgbAlertModule,
   ],
   providers: [EquipmentserviceService],
   bootstrap: [AppComponent]

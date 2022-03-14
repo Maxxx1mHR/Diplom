@@ -29,6 +29,10 @@
     </tbody>
   </table>
 
+
+  <ngb-pagination [collectionSize]="70" [(page)]="page" [boundaryLinks]="true"></ngb-pagination>
+
+
   <table class="table" >
     <thead>
     <tr>
@@ -38,7 +42,6 @@
     </tr>
     </thead>
     <tbody>
-
     <tr id = "tr" *ngFor="let us of readData2" [routerLink]="['/single-equipment/' + us.id]">
       <td>{{us.id}}</td>
       <td>{{us.serial_number}}</td>

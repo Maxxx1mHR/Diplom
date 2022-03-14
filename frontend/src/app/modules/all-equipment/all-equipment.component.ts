@@ -9,6 +9,8 @@ import {combineAll} from "rxjs/operators";
 })
 export class AllEquipmentComponent implements OnInit {
 
+  page = 4;
+
   constructor(private service: EquipmentserviceService) { }
 
   readData: any;
