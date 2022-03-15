@@ -114,6 +114,23 @@ app.get('/all_equipment',(req,res)=>{
    });
 });
 
+//Тест по выводу количества элементов для страничной навигации
+app.get('/all_equipmentCount',(req,res)=>{
+
+   //console.log('test');
+   let qr = `SELECT COUNT (id) as TEST FROM all_equipment`;
+
+   db.query (qr,(err,result)=>{
+      if (err){
+         console.log(err,'err');
+      }
+      if (result.length>0)
+      {
+         res.send({message: 'main info equipment', data: result});
+      }
+   });
+});
+
 //Вывод основной информации одного оборудования по id
 //Тип, производитель, модель, сериный, инвентарный, дата поставки.
 app.get('/all_equipment/:id',(req,res)=>{

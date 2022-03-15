@@ -30,7 +30,8 @@
   </table>
 
 
-  <ngb-pagination [collectionSize]="70" [(page)]="page" [boundaryLinks]="true"></ngb-pagination>
+  <ngb-pagination class="d-flex justify-content-start" [collectionSize]="collectionSize" [(page)]="page" [pageSize]="1" [boundaryLinks]="true" (pageChange)="onPageChanged($event)"></ngb-pagination>
+{{readData3}}
 
 
   <table class="table" >
@@ -49,6 +50,9 @@
     </tr>
     </tbody>
   </table>
+
+
+
 
 
 </div>

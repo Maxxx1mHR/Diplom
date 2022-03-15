@@ -67,6 +67,17 @@ export class EquipmentserviceService {
     return this._http.get('http://localhost:8080/galaxy_all_equipment');
   }
 
+  getCountAllEquip(page: number, itemPerPage: number):Observable<any>{
+    var all_equipment = this._http.get('http://localhost:3000/all_equipmentCount');
+    return this.getPageItems(all_equipment, page, itemPerPage);
+  }
+
+  private getPageItems(all_equipment: Observable<any>, page: number, itemPerPage: number){
+    return all_equipment;
+  }
+
+
+
 
 
 
