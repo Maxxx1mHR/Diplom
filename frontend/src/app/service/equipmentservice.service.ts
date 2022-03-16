@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable, of} from "rxjs";
-import {delay} from "rxjs/operators";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class EquipmentserviceService {
 
   constructor(private _http: HttpClient) {
@@ -18,7 +19,16 @@ export class EquipmentserviceService {
     return this._http.get('http://localhost:3000/all_equipment');
   }
 
-  //Функция вывода одного экземпляра оборудования
+ // getAllEquip(): Observable<any> {
+  //  return this._http.get('http://localhost:3000/all_equipment');
+   // var all_equipment = this._http.get('http://localhost:3000/all_equipment');
+   // return this.getPageItems(all_equipment, page, itemPerPage);
+  //}
+
+
+
+
+    //Функция вывода одного экземпляра оборудования
   getSingleEquip(id: any): Observable<any> {
     let ids = id;
     return this._http.get('http://localhost:3000/all_equipment'+`/${ids}`);
@@ -67,14 +77,22 @@ export class EquipmentserviceService {
     return this._http.get('http://localhost:8080/galaxy_all_equipment');
   }
 
-  getCountAllEquip(page: number, itemPerPage: number):Observable<any>{
-    var all_equipment = this._http.get('http://localhost:3000/all_equipmentCount');
+/*  getCountAllEquip():Observable<any>{
+/!*    var all_equipment = this._http.get('http://localhost:3000/all_equipmentCount');
     return this.getPageItems(all_equipment, page, itemPerPage);
-  }
+    *!/
+    return this._http.get('http://localhost:3000/all_equipmentCount');
 
-  private getPageItems(all_equipment: Observable<any>, page: number, itemPerPage: number){
-    return all_equipment;
-  }
+  }*/
+
+/*  private getPageItems(all_equipment: Observable<any>, page: number, itemPerPage: number): Observable<any>{
+    return all_equipment.pipe(
+      map(u=>{
+        var startIndex = itemPerPage * (page-1);
+        return u.slice(startIndex, startIndex+itemPerPage);
+      }
+      ));
+  }*/
 
 
 
