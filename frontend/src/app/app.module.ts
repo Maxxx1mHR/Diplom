@@ -17,7 +17,7 @@ import { AddRepairEquipmentComponent } from './modules/add-repair-equipment/add-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
-
+import  {NgxPaginationModule} from "ngx-pagination";
 
 @NgModule({
   declarations: [
@@ -41,6 +41,7 @@ import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
     NgbPaginationModule,
     NgbAlertModule,
+    NgxPaginationModule,
   ],
   providers: [EquipmentserviceService],
   bootstrap: [AppComponent]

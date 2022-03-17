@@ -15,18 +15,28 @@ import {ActivatedRoute} from "@angular/router";
 export class AllEquipmentComponent implements OnInit {
 
   //public page: number;
-  //public collectionSize: number;
+    public collectionSize: number;
+    public test: number;
+
+    totalLength: number;
+    page: number =1;
+
 
 
   constructor(private service: EquipmentserviceService) {
 
+    //this.test = 4
+
     //this.page = 1;
     this.getAllEquip();
     this.getGalaxyEquip();
+    this.getCountAllEequip();
+    //this.test = this.collectionSize;
 
   }
   readData: any;
   readData2: any;
+  readData3: any;
 
   ngOnInit(): void {
 /*    this.getAllEquip();
@@ -41,25 +51,31 @@ export class AllEquipmentComponent implements OnInit {
   getAllEquip(){
     //this.page = 1;
     this.service.getAllEquip().subscribe((res)=>{
-      console.log(res, "res==>");
+      console.log(res, "resAllEquip==>");
       this.readData = res.data;
+      this.totalLength = res.length;
+      //this.collectionSize = res.data[0].allCount;
     });
+
   }
 
   getGalaxyEquip(){
     this.service.GalaxyGetAllEquip().subscribe((res)=>{
       console.log(res, "res===>");
       this.readData2 = res.data.recordset;
+
     })
   }
 
-/*  getCountAllEequip(){
+
+  getCountAllEequip(){
     this.service.getCountAllEquip().subscribe((res)=>{
       console.log(res, "res123==>");
-      this.readData3 = res.data[0].TEST;
-      this.collectionSize = res.data[0].TEST;
+      this.readData3 = res.data[0].allCountEquip
+      this.collectionSize = res.data[0].allCountEquip;
     })
-  }*/
+  }
+
 
   onPageChanged(pageNumber: number){
     console.log("page Changed" + pageNumber);

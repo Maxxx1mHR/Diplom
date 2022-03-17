@@ -87,9 +87,10 @@ app.get('/all_equipment', (req, res) => {
 
     //console.log('test');
     let qr = 'SELECT all_equipment.id,name_type_equipment, name_manufacturer, model, serial_number, inventory_number, delivery_date ' +
-        'FROM all_equipment, type_of_equipment, manufacturer ' +
-        'WHERE all_equipment.id_type_of_equipment = type_of_equipment.id ' +
-        'AND all_equipment.id_manufacturer = manufacturer.id';
+         'FROM all_equipment, type_of_equipment, manufacturer ' +
+         'WHERE all_equipment.id_type_of_equipment = type_of_equipment.id ' +
+         'AND all_equipment.id_manufacturer = manufacturer.id';
+
 
     const page = parseInt(req.query.page);
     const limit = parseInt(req.query.limit);
@@ -103,9 +104,9 @@ app.get('/all_equipment', (req, res) => {
         if (err) {
             console.log(err, 'err');
         }
-        if (result.length > 0)  {
+        if (result.length > 0) {
 
-            if(endIndex < result.length)
+/*            if (endIndex < result.length)
                 results.next = {
                     page: page + 1,
                     limit: limit
@@ -116,11 +117,14 @@ app.get('/all_equipment', (req, res) => {
                     page: page - 1,
                     limit: limit
                 }
-            }
+            }*/
 
-            results.results = result.slice(startIndex, endIndex);
-            //res.send({message: 'main info equipment', data: result});
-            res.send({message: 'main info equipment', data: results});
+            //results.results = result.slice(startIndex, endIndex);
+
+            res.send({message: 'main info equipment', data: result});
+            //finalResult = result.slice(startIndex, endIndex);
+            //res.send({message: 'main info equipment', data: finalResult});
+
         }
     });
 });
@@ -129,7 +133,7 @@ app.get('/all_equipment', (req, res) => {
 app.get('/all_equipmentCount', (req, res) => {
 
     //console.log('test');
-    let qr = `SELECT COUNT (id) as TEST FROM all_equipment`;
+    let qr = `SELECT COUNT (id) as allCountEquip FROM all_equipment`;
 
     db.query(qr, (err, result) => {
         if (err) {
@@ -316,11 +320,10 @@ app.post('/add-repair-equipment/:id', (req, res) => {
 });
 
 
-function paginatedResults (model){
-    return (req, res, next) =>{
+function paginatedResults(model) {
+    return (req, res, next) => {
 
     }
-
 }
 
 

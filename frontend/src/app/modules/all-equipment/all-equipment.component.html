@@ -4,6 +4,7 @@
   <table class="table" >
     <thead>
     <tr>
+
       <th scope="col">id</th>
       <th scope="col">Тип</th>
       <th scope="col">Производитель</th>
@@ -15,7 +16,14 @@
     </thead>
     <tbody>
 
-    <tr id = "tr" *ngFor="let us of readData" [routerLink]="['/single-equipment/' + us.id]">
+
+    <tr id = "tr" *ngFor="let us of readData |
+     paginate: { itemsPerPage: 1,
+                      currentPage: page,
+                      totalItems: totalLength
+      }"
+        [routerLink]="['/single-equipment/' + us.id]">
+
       <td>{{us.id}}</td>
       <td>{{us.name_type_equipment}}</td>
       <td>{{us.name_manufacturer}}</td>
@@ -26,11 +34,12 @@
     </tr>
     </tbody>
   </table>
+  <pagination-controls class="text-center"
+                       (pageChange)="page = $event"
+                       previousLabel="Назад"
+                       nextLabel="Вперед"
 
-
-
-  <!--<ngb-pagination class="d-flex justify-content-start" [collectionSize]="collectionSize" [(page)]="page" [pageSize]="1" [boundaryLinks]="true" (pageChange)="onPageChanged($event)"></ngb-pagination>
-  -->
+  ></pagination-controls>
 
 
   <table class="table" >

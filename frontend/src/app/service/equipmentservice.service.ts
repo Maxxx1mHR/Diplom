@@ -25,6 +25,10 @@ export class EquipmentserviceService {
    // return this.getPageItems(all_equipment, page, itemPerPage);
   //}
 
+  getCountAllEquip(): Observable<any>{
+    return this._http.get('http://localhost:3000/all_equipmentCount')
+  }
+
 
 
 
