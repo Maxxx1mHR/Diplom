@@ -18,6 +18,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import  {NgxPaginationModule} from "ngx-pagination";
+import { GalaxyComponent } from './modules/galaxy/galaxy.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import  {NgxPaginationModule} from "ngx-pagination";
     RepairEquipmentComponent,
     AddLocationEquipmentComponent,
     AddRepairEquipmentComponent,
+    GalaxyComponent,
 
   ],
   imports: [

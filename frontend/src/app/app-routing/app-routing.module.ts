@@ -7,6 +7,7 @@ import {LocationEquipmentComponent} from "../modules/location-equipment/location
 import {RepairEquipmentComponent} from "../modules/repair-equipment/repair-equipment.component";
 import {AddLocationEquipmentComponent} from "../modules/add-location-equipment/add-location-equipment.component";
 import {AddRepairEquipmentComponent} from "../modules/add-repair-equipment/add-repair-equipment.component";
+import {GalaxyComponent} from "../modules/galaxy/galaxy.component";
 
 
 const equipment: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'single-equipment/:id', component: SingleEquipmentComponent, children: equipment},
   {path: 'add-location-equipment/:id', component: AddLocationEquipmentComponent},
   {path: 'add-repair-equipment/:id', component: AddRepairEquipmentComponent},
+  {path: 'galaxy', component: GalaxyComponent},
 ];
 
 

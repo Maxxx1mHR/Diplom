@@ -29,7 +29,7 @@ export class AllEquipmentComponent implements OnInit {
 
     //this.page = 1;
     this.getAllEquip();
-    this.getGalaxyEquip();
+    //this.getGalaxyEquip();
     this.getCountAllEequip();
     //this.test = this.collectionSize;
 
@@ -59,13 +59,13 @@ export class AllEquipmentComponent implements OnInit {
 
   }
 
-  getGalaxyEquip(){
+/*  getGalaxyEquip(){
     this.service.GalaxyGetAllEquip().subscribe((res)=>{
       console.log(res, "res===>");
       this.readData2 = res.data.recordset;
 
     })
-  }
+  }*/
 
 
   getCountAllEequip(){

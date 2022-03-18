@@ -1,0 +1,24 @@
+<div class="container mt-5">
+
+  <h4>Не зарегистрированное оборудование</h4>
+  <table class="table" >
+    <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Серийный номер</th>
+      <th scope="col">Инвентарный номер</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr id = "tr" *ngFor="let us of readData2" [routerLink]="['/single-equipment/' + us.id]">
+      <td>{{us.id}}</td>
+      <td>{{us.serial_number}}</td>
+      <td>{{us.inventory_number}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+
+
+
+</div>
