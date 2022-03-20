@@ -1,24 +1,24 @@
 <div class="container mt-5">
 
-  <h4>Не зарегистрированное оборудование</h4>
-  <table class="table" >
+  <h2>Не зарегистрированное оборудование</h2>
+  <table class="table">
     <thead>
     <tr>
       <th scope="col">id</th>
       <th scope="col">Серийный номер</th>
       <th scope="col">Инвентарный номер</th>
+      <th scope="col">Функции</th>
     </tr>
     </thead>
     <tbody>
-    <tr id = "tr" *ngFor="let us of readData2" [routerLink]="['/single-equipment/' + us.id]">
+    <tr id = "tr" *ngFor="let us of readData2">
       <td>{{us.id}}</td>
       <td>{{us.serial_number}}</td>
       <td>{{us.inventory_number}}</td>
+      <td><button mat-button class="btn btn-outline-secondary" (click)="openDialog()">Зарегистрировать</button></td>
     </tr>
     </tbody>
   </table>
-
-
 
 
 </div>

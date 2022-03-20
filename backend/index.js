@@ -326,6 +326,20 @@ function paginatedResults(model) {
     }
 }
 
+app.get ('/type_of_equipment', (req,res)=>{
+
+    let qr = `SELECT id, name_type_equipment FROM type_of_equipment`;
+
+    db.query (qr, (err,result)=>{
+        if(err){
+            console.log(err, 'errs');
+        }
+        if (result.length > 0) {
+            res.send({message: 'get type_of_equipment', data: result});
+        }
+    });
+});
+
 
 app.listen(3000, () => {
     console.log('server MySQL work');

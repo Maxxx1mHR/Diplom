@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {EquipmentserviceService} from "../../service/equipmentservice.service";
+import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {DialogComponent} from "../dialog/dialog.component";
+
 
 @Component({
   selector: 'app-galaxy',
@@ -8,7 +11,7 @@ import {EquipmentserviceService} from "../../service/equipmentservice.service";
 })
 export class GalaxyComponent implements OnInit {
 
-  constructor(private service: EquipmentserviceService) {
+  constructor(private service: EquipmentserviceService, public dialog: MatDialog) {
 
     this.getGalaxyEquip();
 
@@ -18,6 +21,8 @@ export class GalaxyComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+
   }
 
   getGalaxyEquip(){
@@ -26,6 +31,14 @@ export class GalaxyComponent implements OnInit {
       this.readData2 = res.data.recordset;
     })
   }
+
+  openDialog() {
+    this.dialog.open(DialogComponent, {
+      width: '30%'
+
+    });
+  }
+
 
 
 

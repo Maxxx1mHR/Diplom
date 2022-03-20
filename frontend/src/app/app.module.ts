@@ -19,6 +19,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import  {NgxPaginationModule} from "ngx-pagination";
 import { GalaxyComponent } from './modules/galaxy/galaxy.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './modules/dialog/dialog.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from "@angular/material/icon";
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -31,6 +38,7 @@ import { GalaxyComponent } from './modules/galaxy/galaxy.component';
     AddLocationEquipmentComponent,
     AddRepairEquipmentComponent,
     GalaxyComponent,
+    DialogComponent,
 
   ],
   imports: [
@@ -44,6 +52,12 @@ import { GalaxyComponent } from './modules/galaxy/galaxy.component';
     NgbPaginationModule,
     NgbAlertModule,
     NgxPaginationModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
   ],
   providers: [EquipmentserviceService],
   bootstrap: [AppComponent]

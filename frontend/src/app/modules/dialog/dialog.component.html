@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>Зарегистрировать оборудование в системе</h1>
+<div mat-dialog-content>
+
+  <!--
+  1. Выподающий список с типом оборудования, Производителем.
+  2. Модель вводится в ручную
+  3. Поля серийный номер и инвентарный номер не изменяются
+  4. Добавление в "Мою" базу данных
+
+  -->
+
+
+  <h4>Basic native select</h4>
+  <mat-form-field appearance="fill">
+    <mat-label>Cars</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let us of readData" [value]="us.id">{{us.name_type_equipment}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+  <mat-form-field appearance="outline">
+    <mat-label>Производитель</mat-label>
+    <input matInput placeholder="Placeholder">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Модель</mat-label>
+    <input matInput placeholder="Placeholder">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Инвентарный номер</mat-label>
+    <input matInput placeholder="Placeholder">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Серийный номер</mat-label>
+    <input matInput placeholder="Placeholder">
+  </mat-form-field>
+
+</div>
