@@ -25,6 +25,7 @@ const routes: Routes = [
   {path: 'add-location-equipment/:id', component: AddLocationEquipmentComponent},
   {path: 'add-repair-equipment/:id', component: AddRepairEquipmentComponent},
   {path: 'galaxy', component: GalaxyComponent},
+  {path: 'galaxy/:id', component: GalaxyComponent},
 ];
 
 

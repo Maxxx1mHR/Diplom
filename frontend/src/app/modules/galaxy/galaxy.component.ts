@@ -27,7 +27,7 @@ export class GalaxyComponent implements OnInit {
 
   getGalaxyEquip(){
     this.service.GalaxyGetAllEquip().subscribe((res)=>{
-      console.log(res, "res===>");
+      console.log(res, "GalaxyGetAllEquip===>");
       this.readData2 = res.data.recordset;
     })
   }

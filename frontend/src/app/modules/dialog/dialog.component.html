@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Зарегистрировать оборудование в системе</h1>
+<h2 mat-dialog-title>Зарегистрировать оборудование в системе</h2>
 <div mat-dialog-content>
 
   <!--
@@ -9,30 +9,36 @@
 
   -->
 
-
-  <h4>Basic native select</h4>
-  <mat-form-field appearance="fill">
-    <mat-label>Cars</mat-label>
-    <mat-select>
+  <mat-form-field appearance="outline">
+    <mat-label>Тип оборудования</mat-label>
+    <mat-select placeholder="Тип оборудования">
       <mat-option *ngFor="let us of readData" [value]="us.id">{{us.name_type_equipment}}</mat-option>
     </mat-select>
   </mat-form-field>
 
-
   <mat-form-field appearance="outline">
     <mat-label>Производитель</mat-label>
-    <input matInput placeholder="Placeholder">
+    <mat-select placeholder="Выберите производителя">
+      <mat-option *ngFor="let us of readData2" [value]="us.id">{{us.name_manufacturer}}</mat-option>
+    </mat-select>
   </mat-form-field>
+
+
+
 
   <mat-form-field appearance="outline">
     <mat-label>Модель</mat-label>
     <input matInput placeholder="Placeholder">
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
+
+ <mat-form-field [formGroup]="InventarySerialNumberForm" appearance="outline">
     <mat-label>Инвентарный номер</mat-label>
     <input matInput placeholder="Placeholder">
   </mat-form-field>
+
+  <h1>{{this.getparamid}}</h1>
+
 
   <mat-form-field appearance="outline">
     <mat-label>Серийный номер</mat-label>

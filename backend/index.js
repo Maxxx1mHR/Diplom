@@ -87,9 +87,9 @@ app.get('/all_equipment', (req, res) => {
 
     //console.log('test');
     let qr = 'SELECT all_equipment.id,name_type_equipment, name_manufacturer, model, serial_number, inventory_number, delivery_date ' +
-         'FROM all_equipment, type_of_equipment, manufacturer ' +
-         'WHERE all_equipment.id_type_of_equipment = type_of_equipment.id ' +
-         'AND all_equipment.id_manufacturer = manufacturer.id';
+        'FROM all_equipment, type_of_equipment, manufacturer ' +
+        'WHERE all_equipment.id_type_of_equipment = type_of_equipment.id ' +
+        'AND all_equipment.id_manufacturer = manufacturer.id';
 
 
     const page = parseInt(req.query.page);
@@ -104,20 +104,21 @@ app.get('/all_equipment', (req, res) => {
         if (err) {
             console.log(err, 'err');
         }
-        if (result.length > 0) {
+        //if (result.length > 0) {
+        if (result) {
 
-/*            if (endIndex < result.length)
-                results.next = {
-                    page: page + 1,
-                    limit: limit
-                }
+            /*            if (endIndex < result.length)
+                            results.next = {
+                                page: page + 1,
+                                limit: limit
+                            }
 
-            if (startIndex > 0) {
-                results.previous = {
-                    page: page - 1,
-                    limit: limit
-                }
-            }*/
+                        if (startIndex > 0) {
+                            results.previous = {
+                                page: page - 1,
+                                limit: limit
+                            }
+                        }*/
 
             //results.results = result.slice(startIndex, endIndex);
 
@@ -139,9 +140,13 @@ app.get('/all_equipmentCount', (req, res) => {
         if (err) {
             console.log(err, 'err');
         }
-        if (result.length > 0) {
+        /*        if (result.length > 0) {
+                    res.send({message: 'main info equipment', data: result});
+                }*/
+        if (result) {
             res.send({message: 'main info equipment', data: result});
         }
+
     });
 });
 
@@ -326,17 +331,58 @@ function paginatedResults(model) {
     }
 }
 
-app.get ('/type_of_equipment', (req,res)=>{
+app.get('/type_of_equipment', (req, res) => {
 
     let qr = `SELECT id, name_type_equipment FROM type_of_equipment`;
 
-    db.query (qr, (err,result)=>{
-        if(err){
+    db.query(qr, (err, result) => {
+        if (err) {
             console.log(err, 'errs');
         }
-        if (result.length > 0) {
+        /* if (result.length > 0) {
+             res.send({message: 'get type_of_equipment', data: result});
+         }*/
+        if (result) {
             res.send({message: 'get type_of_equipment', data: result});
         }
+    });
+});
+
+app.get('/manufacturer', (req, res) => {
+
+    let qr = `SELECT id, name_manufacturer FROM manufacturer`;
+    db.query(qr, (err, result) => {
+        if (err, 'Error') {
+            console.log(err, 'errs');
+        }
+        if (result) {
+            res.send({
+                message: 'get manufacturer',
+                data: result
+            });
+        }
+    });
+});
+
+appGalaxy.get("/galaxy_single_equipment/:id", function (req, res) {
+
+    let gId = req.params.id;
+
+    dbGalaxy.connect().then(function () {
+        var request = new mssql.Request(dbGalaxy);
+        request.query(`SELECT id, serial_number, inventory_number FROM all_equipment WHERE id = ${gId}`).then(function (resp) {
+            res.send({
+                message: 'single equipment data',
+                data: resp,
+            });
+            console.log(resp.recordset);
+            dbGalaxy.close();
+        }).catch(function (err) {
+            console.log(err);
+            dbGalaxy.close();
+        });
+    }).catch(function (err) {
+        console.log(err);
     });
 });
 

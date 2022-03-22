@@ -15,7 +15,10 @@
       <td>{{us.id}}</td>
       <td>{{us.serial_number}}</td>
       <td>{{us.inventory_number}}</td>
-      <td><button mat-button class="btn btn-outline-secondary" (click)="openDialog()">Зарегистрировать</button></td>
+      <!--<td><button mat-button class="btn btn-outline-secondary" (click)="openDialog()">Зарегистрировать</button></td>-->
+      <td>
+        <a class="btn btn-outline-secondary"[routerLink]="['/galaxy',us.id]" (click)="openDialog()">Зарегистрировать</a>
+      </td>
     </tr>
     </tbody>
   </table>
