@@ -26,6 +26,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from "@angular/material/select";
+import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -58,6 +62,10 @@ import {MatSelectModule} from "@angular/material/select";
     MatIconModule,
     MatInputModule,
     MatSelectModule,
+    MatButtonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   providers: [EquipmentserviceService],
   bootstrap: [AppComponent]

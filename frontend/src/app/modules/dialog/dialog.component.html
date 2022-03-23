@@ -1,48 +1,35 @@
 <h2 mat-dialog-title>Зарегистрировать оборудование в системе</h2>
 <div mat-dialog-content>
-
-  <!--
-  1. Выподающий список с типом оборудования, Производителем.
-  2. Модель вводится в ручную
-  3. Поля серийный номер и инвентарный номер не изменяются
-  4. Добавление в "Мою" базу данных
-
-  -->
-
+<form [formGroup]="InventarySerialNumberForm">
   <mat-form-field appearance="outline">
     <mat-label>Тип оборудования</mat-label>
-    <mat-select placeholder="Тип оборудования">
+    <mat-select formControlName="type_equipment" placeholder="Тип оборудования">
       <mat-option *ngFor="let us of readData" [value]="us.id">{{us.name_type_equipment}}</mat-option>
     </mat-select>
   </mat-form-field>
-
   <mat-form-field appearance="outline">
     <mat-label>Производитель</mat-label>
-    <mat-select placeholder="Выберите производителя">
+    <mat-select formControlName="manufacturer" placeholder="Выберите производителя">
       <mat-option *ngFor="let us of readData2" [value]="us.id">{{us.name_manufacturer}}</mat-option>
     </mat-select>
   </mat-form-field>
-
-
-
-
   <mat-form-field appearance="outline">
     <mat-label>Модель</mat-label>
-    <input matInput placeholder="Placeholder">
+    <input matInput formControlName="model" placeholder="Placeholder">
   </mat-form-field>
-
-
- <mat-form-field [formGroup]="InventarySerialNumberForm" appearance="outline">
+  <mat-form-field appearance="outline">
     <mat-label>Инвентарный номер</mat-label>
-    <input matInput placeholder="Placeholder">
+    <input matInput formControlName="inventary_number" placeholder="Placeholder">
   </mat-form-field>
-
-  <h1>{{this.getparamid}}</h1>
-
-
   <mat-form-field appearance="outline">
     <mat-label>Серийный номер</mat-label>
-    <input matInput placeholder="Placeholder">
+    <input matInput formControlName="serial_number" placeholder="Placeholder">
   </mat-form-field>
-
+</form>
 </div>
+
+<div mat-dialog-action [align]="'end'">
+  <button mat-raised-button color="warn" mat-dialog-close>Закрыть</button>
+  <button style="margin-left: 8px" mat-raised-button color="primary">Сохранить</button>
+</div>
+
