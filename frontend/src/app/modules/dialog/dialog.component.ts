@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {EquipmentserviceService} from "../../service/equipmentservice.service";
 import {FormControl, FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
-
+import {MatDialogRef, MAT_DIALOG_DATA} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-dialog',
@@ -19,7 +19,10 @@ export class DialogComponent implements OnInit {
 
   constructor(private service: EquipmentserviceService,
               private router: ActivatedRoute,
-              private formBuilder: FormBuilder)
+              private formBuilder: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public dialogDataForInputForm : any,
+  )
+
   {
     this.getparamid = this.router;
 
@@ -33,10 +36,16 @@ export class DialogComponent implements OnInit {
       type_equipment : ['', Validators.required],
       manufacturer : ['', Validators.required],
       model : ['', Validators.required],
-      inventary_number : ['', Validators.required],
+      inventory_number : ['', Validators.required],
       serial_number : ['', Validators.required]
-
     })
+
+    //console.log(this.dialogDataForInputForm,'RRRR');
+    //Для вставки данных из формы в диалоговое окно.
+    if(this.dialogDataForInputForm){
+      this.InventarySerialNumberForm.controls['inventory_number'].setValue(this.dialogDataForInputForm.inventory_number);
+      this.InventarySerialNumberForm.controls['serial_number'].setValue(this.dialogDataForInputForm.serial_number);
+    }
 
 
 

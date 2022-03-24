@@ -5,6 +5,7 @@ import {DialogComponent} from "../dialog/dialog.component";
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import {ActivatedRoute} from "@angular/router";
 
 
 @Component({
@@ -15,24 +16,26 @@ import {MatTableDataSource} from '@angular/material/table';
 export class GalaxyComponent implements OnInit {
 
 
-  displayedColumns: string[] = ['id', 'serial_number', 'inventory_number'];
+  displayedColumns: string[] = ['id', 'serial_number', 'inventory_number', 'function'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
 
-  constructor(private service: EquipmentserviceService, public dialog: MatDialog) {
+  constructor(private service: EquipmentserviceService, public dialog: MatDialog, private router: ActivatedRoute) {
 
     //this.getGalaxyEquip();
+    console.log('PARAMS', router);
 
   }
 
-  readData2: any;
+  //readData2: any;
 
 
   ngOnInit(): void {
     this.getGalaxyAllEquip();
+    //this.getGalaxyEquip();
 
 
   }
@@ -40,7 +43,7 @@ export class GalaxyComponent implements OnInit {
 /*  getGalaxyEquip(){
     this.service.GalaxyGetAllEquip().subscribe((res)=>{
       console.log(res, "GalaxyGetAllEquip===>");
-      this.readData2 = res.data.recordset;
+      this.readData2 = res.data.recordset.id;
     })
   }*/
 
@@ -49,6 +52,7 @@ export class GalaxyComponent implements OnInit {
       .subscribe({
         next: (res)=>{
           console.log("Galaxy All Equipment",res);
+          //this.readData2 = res.data.recordset
           this.dataSource = new MatTableDataSource(res.data.recordset);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
@@ -68,9 +72,10 @@ export class GalaxyComponent implements OnInit {
     }
   }
 
-  openDialog() {
+  openDialog(row: any) {
     this.dialog.open(DialogComponent, {
-      width: '30%'
+      width: '30%',
+      data: row
 
     });
   }

@@ -386,6 +386,12 @@ appGalaxy.get("/galaxy_single_equipment/:id", function (req, res) {
     });
 });
 
+app.post('add_in_allequipment_from_galaxy',(req,res)=>{
+
+
+})
+
+
 
 app.listen(3000, () => {
     console.log('server MySQL work');

@@ -19,17 +19,17 @@
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Инвентарный номер</mat-label>
-    <input matInput formControlName="inventary_number" placeholder="Placeholder">
+    <input matInput formControlName="inventory_number" placeholder="Placeholder" readonly>
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Серийный номер</mat-label>
-    <input matInput formControlName="serial_number" placeholder="Placeholder">
+    <input matInput formControlName="serial_number" placeholder="Placeholder" readonly>
   </mat-form-field>
 </form>
 </div>
 
 <div mat-dialog-action [align]="'end'">
   <button mat-raised-button color="warn" mat-dialog-close>Закрыть</button>
-  <button style="margin-left: 8px" mat-raised-button color="primary">Сохранить</button>
+  <button style="margin-left: 8px" mat-raised-button color="primary">Добавить</button>
 </div>
 
