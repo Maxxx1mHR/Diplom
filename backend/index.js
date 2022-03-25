@@ -386,11 +386,27 @@ appGalaxy.get("/galaxy_single_equipment/:id", function (req, res) {
     });
 });
 
-app.post('add_in_allequipment_from_galaxy',(req,res)=>{
+app.post('/add_in_allequipment_from_galaxy',(req,res)=>{
 
+    let id_type_of_equipment = req.body.type_equipment;  //возможно тут названия как из формы в компоненте dialog. ТУТ ТОЧНО НАЗВАНИЕ после = НАЗВАНИЯ ИЗ ФОРМЫ
+    //Поэтому даже в body при запросе должны быть такие же названия как тут в форме, а не БД.
+    let id_manufacturer = req.body.manufacturer;
+    let model = req.body.model;
+    let serial_number = req.body.serial_number;
+    let inventory_number = req.body.inventory_number;
 
-})
+    let qr = `INSERT INTO all_equipment (id_type_of_equipment, id_manufacturer, model, serial_number, inventory_number) VALUES ('${id_type_of_equipment}', '${id_manufacturer}', '${model}', '${serial_number}', '${inventory_number}')`;
 
+    db.query(qr,(err,result)=>{
+        if(err){
+            console.log(err,"Не удалось вставить данные из галактики");
+        }
+        console.log((result, 'Данные добавление'));
+        res.send({
+            message: 'Данные добавлены',
+        });
+    });
+});
 
 
 app.listen(3000, () => {
