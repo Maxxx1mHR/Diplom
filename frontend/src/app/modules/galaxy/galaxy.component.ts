@@ -26,26 +26,26 @@ export class GalaxyComponent implements OnInit {
   constructor(private service: EquipmentserviceService, public dialog: MatDialog, private router: ActivatedRoute) {
 
     //this.getGalaxyEquip();
-    console.log('PARAMS', router);
+    //console.log('PARAMS', router);
 
   }
 
-  //readData2: any;
+  readData2: any;
 
 
   ngOnInit(): void {
     this.getGalaxyAllEquip();
-    //this.getGalaxyEquip();
+    this.getGalaxyEquip();
 
 
   }
 
-/*  getGalaxyEquip(){
+  getGalaxyEquip(){
     this.service.GalaxyGetAllEquip().subscribe((res)=>{
       console.log(res, "GalaxyGetAllEquip===>");
-      this.readData2 = res.data.recordset.id;
+      this.readData2 = res.data.recordset;
     })
-  }*/
+  }
 
   getGalaxyAllEquip(){
     this.service.GalaxyGetAllEquip()
