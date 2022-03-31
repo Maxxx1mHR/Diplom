@@ -64,6 +64,8 @@ appGalaxy.get("/galaxy_all_equipment", function (req, res) {
     dbGalaxy.connect().then(function () {
         var request = new mssql.Request(dbGalaxy);
         request.query("select * from all_equipment").then(function (resp) {
+
+
             res.send({
                 message: 'all user data',
                 data: resp

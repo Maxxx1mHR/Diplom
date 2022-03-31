@@ -11,15 +11,15 @@
     </tr>
     </thead>
     <tbody>
-    <tr id = "tr" *ngFor="let us of readData2">
-      <ng-container *ngIf="us.id == 2">
+    <tr id = "tr" *ngFor="let us of resultArr2">
+
       <td>{{us.id}}</td>
       <td>{{us.serial_number}}</td>
       <td>{{us.inventory_number}}</td>
       <td>
         <a class="btn btn-outline-secondary"[routerLink]="['/galaxy',us.id]" (click)="openDialog(us)">Зарегистрировать</a>
       </td>
-      </ng-container>
+
     </tr>
     </tbody>
   </table>
