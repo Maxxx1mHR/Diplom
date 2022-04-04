@@ -30,6 +30,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import { LoginComponent } from './modules/login/login.component';
+import { SignupComponent } from './modules/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import {MatSortModule} from '@angular/material/sort';
     AddRepairEquipmentComponent,
     GalaxyComponent,
     DialogComponent,
+    LoginComponent,
+    SignupComponent,
 
   ],
   imports: [

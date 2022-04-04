@@ -8,6 +8,8 @@ import {RepairEquipmentComponent} from "../modules/repair-equipment/repair-equip
 import {AddLocationEquipmentComponent} from "../modules/add-location-equipment/add-location-equipment.component";
 import {AddRepairEquipmentComponent} from "../modules/add-repair-equipment/add-repair-equipment.component";
 import {GalaxyComponent} from "../modules/galaxy/galaxy.component";
+import {LoginComponent} from "../modules/login/login.component";
+import {SignupComponent} from "../modules/signup/signup.component";
 
 
 const equipment: Routes = [
@@ -26,6 +28,8 @@ const routes: Routes = [
   {path: 'add-repair-equipment/:id', component: AddRepairEquipmentComponent},
   {path: 'galaxy', component: GalaxyComponent},
   {path: 'galaxy/:id', component: GalaxyComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'signup', component: SignupComponent},
 ];
 
 
