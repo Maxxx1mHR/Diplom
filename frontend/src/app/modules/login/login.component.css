@@ -4,9 +4,9 @@
   width: 500px;
   padding: 40px;
   position: absolute;
-  top: 50%;
+  /*top: 50%;*/
   left: 50%;
-  transform: translate(-50%, 50%);
+  transform: translate(-50%, 20%);
   background: rgb(65, 142, 213);
 }
 
@@ -18,4 +18,7 @@ label{
   color: aliceblue;
 }
 
-
+a{
+  padding: 10px;
+  color: aliceblue;
+}
