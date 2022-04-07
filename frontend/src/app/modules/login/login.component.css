@@ -1,0 +1,21 @@
+.card{
+  margin-top: 10px;
+  border: none;
+  width: 500px;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  background: rgb(65, 142, 213);
+}
+
+.card h1,h6{
+  color: aliceblue;
+}
+
+label{
+  color: aliceblue;
+}
+
+
