@@ -411,6 +411,34 @@ app.post('/add_in_allequipment_from_galaxy',(req,res)=>{
 });
 
 
+app.post('/signup',(req,res)=>{
+
+    let family_name = req.body.family_name;
+    let name = req.body.name;
+    let dad_name = req.body.dad_name;
+    let id_department = req.body.id_department;
+    let id_rnu = req.body.id_rnu;
+    let login = req.body.login;
+    let password = req.body.password;
+
+    let qr = `INSERT INTO staff (family_name, name, dad_name, id_department, id_rnu, login, password) VALUES ('${family_name}','${name}','${dad_name}','${id_department}','${id_rnu}','${login}','${password}')`;
+
+    db.query(qr,(err,result)=>{
+        if(err){
+            console.log(err,"Ошибка, не удалось добваить новго пользователя");
+        }
+        console.log((result,"Пользователь добавлен"));
+        res.send({
+            message: "Пользователь добавлен"
+        });
+    });
+});
+
+
+
+
+
+
 app.listen(3000, () => {
     console.log('server MySQL work');
 })

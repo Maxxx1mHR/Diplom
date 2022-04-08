@@ -48,5 +48,4 @@ export class AddRepairEquipmentComponent implements OnInit {
     }
   }
 
-
 }

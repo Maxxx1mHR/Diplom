@@ -112,6 +112,10 @@ export class EquipmentserviceService {
     return this._http.post('http://localhost:3000/add_in_allequipment_from_galaxy', data);
   }
 
+  postSignup(data: any): Observable<any>{
+    return this._http.post('http://localhost:3000/signup', data);
+  }
+
 
 }
 
