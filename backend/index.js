@@ -12,6 +12,8 @@ const {compileETag} = require("express/lib/utils");
 const app = express();
 app.use(cors());
 app.use(bodyparser.json());
+app.use(express.urlencoded({extended: false}))
+
 
 const appGalaxy = express();
 appGalaxy.use(cors());
@@ -107,7 +109,7 @@ app.get('/all_equipment', (req, res) => {
             console.log(err, 'err');
         }
         //if (result.length > 0) {
-        if (result) {
+        else  {
 
             /*            if (endIndex < result.length)
                             results.next = {
@@ -145,7 +147,7 @@ app.get('/all_equipmentCount', (req, res) => {
         /*        if (result.length > 0) {
                     res.send({message: 'main info equipment', data: result});
                 }*/
-        if (result) {
+       else {
             res.send({message: 'main info equipment', data: result});
         }
 
@@ -433,6 +435,11 @@ app.post('/signup',(req,res)=>{
         });
     });
 });
+
+
+//Блок для регистрации
+
+
 
 
 
