@@ -182,7 +182,7 @@ app.get('/all_equipment/:id', (req, res) => {
 //Вывод списка сотрудников
 //ФИО, отдел и филиал
 app.get('/staff', (req, res) => {
-    let qr = 'SELECT staff.id, family_name, name, dad_name, name_department, name_rnu ' +
+    let qr = 'SELECT staff.id, family_name, name, dad_name, name_department, name_rnu, login, password ' +
         'FROM staff, departments, rnu' +
         ' WHERE staff.id_department = departments.id AND staff.id_rnu = rnu.id';
 

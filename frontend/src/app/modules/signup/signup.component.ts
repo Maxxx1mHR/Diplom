@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormBuilder, FormControl, Validators} from "@angular/forms";
 import {EquipmentserviceService} from "../../service/equipmentservice.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-signup',
@@ -9,7 +10,7 @@ import {EquipmentserviceService} from "../../service/equipmentservice.service";
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private service: EquipmentserviceService) { }
+  constructor(private service: EquipmentserviceService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -29,7 +30,17 @@ export class SignupComponent implements OnInit {
   })
 
   SignUpNewUser(){
-    console.log(this.SignUpForm.value);
+    if(this.SignUpForm.valid){
+      console.log(this.SignUpForm.value);
+      this.service.postSignup(this.SignUpForm.value).subscribe((res)=>{
+        alert("Вы успешно зарегистированы");
+        this.SignUpForm.reset();
+        this.router.navigate(['/login']);
+      });
+    }
+    else{
+      if(this.SignUpForm.touched) alert("Все поля должны быть заполены");
+    }
   }
 
 }

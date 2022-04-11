@@ -6,16 +6,16 @@
           <h1>Вход</h1>
           <h6>Введите логин и пароль</h6>
         </div>
-        <form>
+        <form [formGroup]="LoginForm">
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label class="form-label">Логин</label>
+            <input type="text" class="form-control" formControlName="login">
           </div>
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <label class="form-label">Пароль</label>
+            <input type="password" class="form-control" formControlName="password">
           </div>
-          <button type="submit" class="btn btn-primary">Войти</button>
+          <button class="btn btn-primary" (click)="Login()">Войти</button>
         </form>
         <a routerLink="/signup">Нет аккаунта? Нажмите для регистрации</a>
       </div>
