@@ -1,11 +1,20 @@
 const express = require('express');
 const bodyparser = require('body-parser');
 const cors = require('cors');
-
+const bcrypt = require('bcrypt');
+const passport = require('passport');
 
 const mysql = require('mysql2');
 const mssql = require('mssql');
 const {compileETag} = require("express/lib/utils");
+
+const initializePassport = require('./passport-config')
+initializePassport(
+    passport,
+    email => users.find(user => user.email === email),
+    id => users.find(user => user.id === id)
+)
+
 
 //const {router} = require("express/lib/application");
 
@@ -22,6 +31,8 @@ appGalaxy.use(bodyparser.json());
 // создаем парсер для данных в формате json ТЕСТ
 //const jsonParser = express.json();
 
+
+const users = []
 
 //Соединение с базой данных
 const db = mysql.createConnection({
@@ -413,7 +424,7 @@ app.post('/add_in_allequipment_from_galaxy',(req,res)=>{
 });
 
 
-app.post('/signup',(req,res)=>{
+/*app.post('/signup',(req,res)=>{
 
     let family_name = req.body.family_name;
     let name = req.body.name;
@@ -434,10 +445,36 @@ app.post('/signup',(req,res)=>{
             message: "Пользователь добавлен"
         });
     });
-});
+});*/
 
 
 //Блок для регистрации
+
+app.post('/signup',async (req,res)=>{
+    try {
+        let family_name = req.body.family_name;
+        let name = req.body.name;
+        let dad_name = req.body.dad_name;
+        let id_department = req.body.id_department;
+        let id_rnu = req.body.id_rnu;
+        let login = req.body.login;
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        let qr = `INSERT INTO staff (family_name, name, dad_name, id_department, id_rnu, login, password) VALUES ('${family_name}','${name}','${dad_name}','${id_department}','${id_rnu}','${login}','${hashedPassword}')`;
+
+        db.query(qr,(err,result)=> {
+            if (err) {
+                console.log(err, "Ошибка, не удалось добваить новго пользователя");
+            }
+            console.log((result, "Пользователь добавлен"));
+            res.send({
+                message: "Пользователь добавлен",
+                data: result
+            });
+        });
+    } catch {
+        res.redirect('/signup');
+    }
+});
 
 
 

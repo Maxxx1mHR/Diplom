@@ -31,7 +31,7 @@ export class SignupComponent implements OnInit {
 
   SignUpNewUser(){
     if(this.SignUpForm.valid){
-      console.log(this.SignUpForm.value);
+      //console.log(this.SignUpForm.value);
       this.service.postSignup(this.SignUpForm.value).subscribe((res)=>{
         alert("Вы успешно зарегистированы");
         this.SignUpForm.reset();
