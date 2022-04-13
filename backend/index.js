@@ -7,6 +7,9 @@ const passport = require('passport');
 const mysql = require('mysql2');
 const mssql = require('mssql');
 const {compileETag} = require("express/lib/utils");
+const Sequelize = require('sequelize');
+
+const authRouter = require('./authRouter')
 
 const initializePassport = require('./passport-config')
 initializePassport(
@@ -23,6 +26,7 @@ app.use(cors());
 app.use(bodyparser.json());
 app.use(express.urlencoded({extended: false}))
 
+app.use("/auth", authRouter)
 
 const appGalaxy = express();
 appGalaxy.use(cors());
@@ -33,6 +37,67 @@ appGalaxy.use(bodyparser.json());
 
 
 const users = []
+
+const sequelize = new Sequelize(
+    'diplom',
+    'root',
+    'root',
+    {
+        dialect: 'mysql',
+        host: 'localhost',
+        define:{
+            timestamps: false
+        }
+    }
+)
+
+sequelize
+    .authenticate()
+    .then(()=> console.log('Connecnted.'))
+    .catch((err)=>console.erroe('Connection error: ', err))
+
+//class staff extends Sequelize.Model{}
+
+/*const Staff = sequelize.define('staffs',
+    {
+        id:{
+            type: Sequelize.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: false
+        },
+        family_name:{
+            type: Sequelize.CHAR,
+            allowNull: false
+        },
+        name:{
+            type: Sequelize.CHAR,
+            allowNull: false
+        },
+        dad_name:{
+            type: Sequelize.CHAR,
+            allowNull: false
+        },
+        id_department:{
+            type:Sequelize.INTEGER,
+            allowNull: false
+        },
+        id_rnu:{
+            type:Sequelize.INTEGER,
+            allowNull: false
+        },
+        login:{
+            type:Sequelize.CHAR,
+            allowNull: true
+        },
+        password:{
+            type:Sequelize.CHAR,
+            allowNull: true
+        }
+    }
+)*/
+
+
 
 //Соединение с базой данных
 const db = mysql.createConnection({
@@ -71,6 +136,11 @@ dbGalaxy.connect(err => {
         console.log('Соединение c Галактикой успешно установлено');
     }
 });
+
+
+
+
+
 
 appGalaxy.get("/galaxy_all_equipment", function (req, res) {
 
@@ -198,6 +268,7 @@ app.get('/staff', (req, res) => {
     let qr = 'SELECT staff.id, family_name, name, dad_name, name_department, name_rnu, login, password ' +
         'FROM staff, departments, rnu' +
         ' WHERE staff.id_department = departments.id AND staff.id_rnu = rnu.id';
+
 
     db.query(qr, (err, result) => {
         if (err) {
