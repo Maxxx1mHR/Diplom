@@ -7,9 +7,19 @@ const passport = require('passport');
 const mysql = require('mysql2');
 const mssql = require('mssql');
 const {compileETag} = require("express/lib/utils");
-const Sequelize = require('sequelize');
 
-const authRouter = require('./authRouter')
+const Sequelize = require('sequelize')
+
+const sequelize = new Sequelize('diplom','root','root',{
+    host: 'localhost',
+    dialect: 'mysql',
+})
+
+sequelize.authenticate().then(()=>{
+    console.log("Соединение удалоась Sequilize")
+}).catch((err)=>{
+    console.log("Ошибка соединеия")
+})
 
 const initializePassport = require('./passport-config')
 initializePassport(
@@ -19,6 +29,52 @@ initializePassport(
 )
 
 
+const Staff = sequelize.define(
+    'Staff',
+    {
+        id: {
+            type: Sequelize.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: true
+        },
+        family_name: {
+            type: Sequelize.CHAR,
+            allowNull: true
+        },
+        name: {
+            type: Sequelize.CHAR,
+            allowNull: true
+        },
+        dad_name: {
+            type: Sequelize.CHAR,
+            allowNull: true
+        },
+        id_department: {
+            type: Sequelize.INTEGER,
+            allowNull: true
+        },
+        id_rnu: {
+            type: Sequelize.INTEGER,
+            allowNull: true
+        },
+        login: {
+            type: Sequelize.CHAR,
+            allowNull: true
+        },
+        password: {
+            type: Sequelize.CHAR,
+            allowNull: true
+        }
+    },
+    {
+        timestamps:false
+    }
+)
+
+
+
+
 //const {router} = require("express/lib/application");
 
 const app = express();
@@ -26,7 +82,6 @@ app.use(cors());
 app.use(bodyparser.json());
 app.use(express.urlencoded({extended: false}))
 
-app.use("/auth", authRouter)
 
 const appGalaxy = express();
 appGalaxy.use(cors());
@@ -36,66 +91,45 @@ appGalaxy.use(bodyparser.json());
 //const jsonParser = express.json();
 
 
-const users = []
+app.post('/test123', (req,res)=> {
+//Staff.sync({alter: true}).then(()=>{
 
-const sequelize = new Sequelize(
-    'diplom',
-    'root',
-    'root',
-    {
-        dialect: 'mysql',
-        host: 'localhost',
-        define:{
-            timestamps: false
+    //const staff = Staff.build({login: 'test', password: '123'});
+    //return staff.save();
+    //console.log(staff);
+
+    /*
+        return Staff.findAll({attributes: ['login', 'password']});
+    }).then((data)=>{
+        data.forEach((element)=>{
+            if(login == 'test') {
+                console.log(element.toJSON());
+            }
+        })
+    })
+    */
+
+    try {
+        const {login, password} = req.body
+        const candidate = Staff.findAll({attributes: ['login']});
+
+
+        //const candidate = Staff.findOne({where: login})
+        if (!candidate) {
+            return res.status(400).json('Ошибка уже существует', candidate)
         }
+        //const staff = Staff.build({login: 'test', password: '123'});
+        const staff = new Staff({login, password})
+        //staff.save()
+        return res.json({message: 'Пользователь добавлен', candidate})
+    }catch (e){
+        console.log(e)
+        res.status(400).json({message: 'Не удалось'})
     }
-)
 
-sequelize
-    .authenticate()
-    .then(()=> console.log('Connecnted.'))
-    .catch((err)=>console.erroe('Connection error: ', err))
+})
 
-//class staff extends Sequelize.Model{}
-
-/*const Staff = sequelize.define('staffs',
-    {
-        id:{
-            type: Sequelize.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-            allowNull: false
-        },
-        family_name:{
-            type: Sequelize.CHAR,
-            allowNull: false
-        },
-        name:{
-            type: Sequelize.CHAR,
-            allowNull: false
-        },
-        dad_name:{
-            type: Sequelize.CHAR,
-            allowNull: false
-        },
-        id_department:{
-            type:Sequelize.INTEGER,
-            allowNull: false
-        },
-        id_rnu:{
-            type:Sequelize.INTEGER,
-            allowNull: false
-        },
-        login:{
-            type:Sequelize.CHAR,
-            allowNull: true
-        },
-        password:{
-            type:Sequelize.CHAR,
-            allowNull: true
-        }
-    }
-)*/
+//const users = []
 
 
 
