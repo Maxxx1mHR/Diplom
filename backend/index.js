@@ -11,14 +11,14 @@ const {compileETag} = require("express/lib/utils");
 /*
 const Sequelize = require('sequelize')
 
-const sequelize = new Sequelize('diplom','root','root',{
+const sequelize = new Sequelize('diplom', 'root', 'root', {
     host: 'localhost',
     dialect: 'mysql',
 })
 
-sequelize.authenticate().then(()=>{
+sequelize.authenticate().then(() => {
     console.log("Соединение удалоась Sequilize")
-}).catch((err)=>{
+}).catch((err) => {
     console.log("Ошибка соединеия")
 })
 
@@ -69,12 +69,10 @@ const Staff = sequelize.define(
         }
     },
     {
-        timestamps:false
+        timestamps: false
     }
 )
 */
-
-
 
 
 //const {router} = require("express/lib/application");
@@ -100,7 +98,25 @@ const authRouter = require('./registration/authRouter')
 app.use('/auth',authRouter)
 
 
-app.post('/test123', (req,res)=> {
+/*
+Staff.sync({alter: true}).then(()=>{
+    let login = "Test"
+    let temp
+    return Staff.findOne({where: {login: login}})
+}).then((staff)=>{
+    temp = staff
+    console.log("ЛОГИН",staff.login)
+    console.log("ЛОГИН",temp.login)
+    if(temp){
+        console.log("Clone found")
+    }
+    else console.log("Insert")
+
+})
+*/
+
+
+app.post('/test123', (req, res) => {
 //Staff.sync({alter: true}).then(()=>{
 
     //const staff = Staff.build({login: 'test', password: '123'});
@@ -119,27 +135,52 @@ app.post('/test123', (req,res)=> {
     */
 
     try {
-        const {login, password} = req.body
-        const candidate = Staff.findAll({attributes: ['login']});
+        const login1 = req.body.login
+        const password = req.body.password
+
+        //return Staff.findOne({where: {login: login1}}).then((staff)=>{
+        //console.log(staff.login)
+
+        Staff.findOne({where: {login: login1}}).then((staff) => {
+            //console.log("Func", staff.login)
+            //return staff.login
 
 
-        //const candidate = Staff.findOne({where: login})
-        if (!candidate) {
-            return res.status(400).json('Ошибка уже существует', candidate)
+        if (staff) {
+            return res.status(400).json('Ошибка уже существует')
         }
-        //const staff = Staff.build({login: 'test', password: '123'});
-        const staff = new Staff({login, password})
-        //staff.save()
-        return res.json({message: 'Пользователь добавлен', candidate})
-    }catch (e){
+        //console.log("Пользователь добавлен")
+            res.status(400).json({message: 'Пользователь добавлен'})
+        })
+
+
+    } catch (e) {
         console.log(e)
         res.status(400).json({message: 'Не удалось'})
     }
 
+    /*
+            if (candidate==login1) {
+                console.log("КАНДИДАТ",candidate)
+                return res.status(400).json('Ошибка уже существует', candidate)
+            }
+
+            const staff = Staff.build({login: 'test', password: '123'});
+            //const staff = new Staff({login, password})
+            //staff.save()
+            console.log("КАНДИДАТ",candidate)
+            return res.json({message: 'Пользователь добавлен', candidate})
+
+        } catch (e) {
+            console.log(e)
+            res.status(400).json({message: 'Не удалось'})
+        }
+    */
+
 })
 
-//const users = []
 
+//const users = []
 
 
 //Соединение с базой данных
@@ -179,10 +220,6 @@ dbGalaxy.connect(err => {
         console.log('Соединение c Галактикой успешно установлено');
     }
 });
-
-
-
-
 
 
 appGalaxy.get("/galaxy_all_equipment", function (req, res) {
@@ -233,7 +270,7 @@ app.get('/all_equipment', (req, res) => {
             console.log(err, 'err');
         }
         //if (result.length > 0) {
-        else  {
+        else {
 
             /*            if (endIndex < result.length)
                             results.next = {
@@ -271,7 +308,7 @@ app.get('/all_equipmentCount', (req, res) => {
         /*        if (result.length > 0) {
                     res.send({message: 'main info equipment', data: result});
                 }*/
-       else {
+        else {
             res.send({message: 'main info equipment', data: result});
         }
 
@@ -515,7 +552,7 @@ appGalaxy.get("/galaxy_single_equipment/:id", function (req, res) {
     });
 });
 
-app.post('/add_in_allequipment_from_galaxy',(req,res)=>{
+app.post('/add_in_allequipment_from_galaxy', (req, res) => {
 
     let id_type_of_equipment = req.body.type_equipment;  //возможно тут названия как из формы в компоненте dialog. ТУТ ТОЧНО НАЗВАНИЕ после = НАЗВАНИЯ ИЗ ФОРМЫ
     //Поэтому даже в body при запросе должны быть такие же названия как тут в форме, а не БД.
@@ -526,9 +563,9 @@ app.post('/add_in_allequipment_from_galaxy',(req,res)=>{
 
     let qr = `INSERT INTO all_equipment (id_type_of_equipment, id_manufacturer, model, serial_number, inventory_number) VALUES ('${id_type_of_equipment}', '${id_manufacturer}', '${model}', '${serial_number}', '${inventory_number}')`;
 
-    db.query(qr,(err,result)=>{
-        if(err){
-            console.log(err,"Не удалось вставить данные из галактики");
+    db.query(qr, (err, result) => {
+        if (err) {
+            console.log(err, "Не удалось вставить данные из галактики");
         }
         console.log((result, 'Данные добавление'));
         res.send({
@@ -564,7 +601,7 @@ app.post('/add_in_allequipment_from_galaxy',(req,res)=>{
 
 //Блок для регистрации
 
-app.post('/signup',async (req,res)=>{
+app.post('/signup', async (req, res) => {
     try {
         let family_name = req.body.family_name;
         let name = req.body.name;
@@ -575,7 +612,7 @@ app.post('/signup',async (req,res)=>{
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         let qr = `INSERT INTO staff (family_name, name, dad_name, id_department, id_rnu, login, password) VALUES ('${family_name}','${name}','${dad_name}','${id_department}','${id_rnu}','${login}','${hashedPassword}')`;
 
-        db.query(qr,(err,result)=> {
+        db.query(qr, (err, result) => {
             if (err) {
                 console.log(err, "Ошибка, не удалось добваить новго пользователя");
             }
@@ -589,12 +626,6 @@ app.post('/signup',async (req,res)=>{
         res.redirect('/signup');
     }
 });
-
-
-
-
-
-
 
 
 app.listen(3000, () => {
