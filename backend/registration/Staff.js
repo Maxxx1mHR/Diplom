@@ -8,27 +8,27 @@ return sequelize.define(
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true,
-            allowNull: false
+            allowNull: true
         },
         family_name: {
             type: Sequelize.CHAR,
-            allowNull: false
+            allowNull: true
         },
         name: {
             type: Sequelize.CHAR,
-            allowNull: false
+            allowNull: true
         },
         dad_name: {
             type: Sequelize.CHAR,
-            allowNull: false
+            allowNull: true
         },
         id_department: {
             type: Sequelize.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         id_rnu: {
             type: Sequelize.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         login: {
             type: Sequelize.CHAR,
