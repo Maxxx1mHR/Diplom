@@ -8,6 +8,7 @@ const mysql = require('mysql2');
 const mssql = require('mssql');
 const {compileETag} = require("express/lib/utils");
 
+/*
 const Sequelize = require('sequelize')
 
 const sequelize = new Sequelize('diplom','root','root',{
@@ -71,6 +72,7 @@ const Staff = sequelize.define(
         timestamps:false
     }
 )
+*/
 
 
 
@@ -89,6 +91,13 @@ appGalaxy.use(bodyparser.json());
 
 // создаем парсер для данных в формате json ТЕСТ
 //const jsonParser = express.json();
+
+const registration = require('./registration')
+const Staff = registration.Staff
+
+
+const authRouter = require('./registration/authRouter')
+app.use('/auth',authRouter)
 
 
 app.post('/test123', (req,res)=> {
