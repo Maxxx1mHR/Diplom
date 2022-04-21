@@ -11,3 +11,4 @@ module.exports = {
     sequelize : sequelize,
     Staff : Staff
 }
+
