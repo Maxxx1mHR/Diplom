@@ -32,6 +32,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { LoginComponent } from './modules/login/login.component';
 import { SignupComponent } from './modules/signup/signup.component';
+import { NavComponent } from './modules/nav/nav.component';
+import { CharacteristicComponent } from './modules/characteristic/characteristic.component';
+import { AddCharacteristicComponent } from './modules/add-characteristic/add-characteristic.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,9 @@ import { SignupComponent } from './modules/signup/signup.component';
     DialogComponent,
     LoginComponent,
     SignupComponent,
+    NavComponent,
+    CharacteristicComponent,
+    AddCharacteristicComponent,
 
   ],
   imports: [

@@ -19,12 +19,27 @@
             <input type="text" class="form-control" formControlName="dad_name">
           </div>
           <div class="mb-3">
-            <label class="form-label">Филиал</label>
-            <input type="text" class="form-control" formControlName="id_department">
+<!--            <label class="form-label">Филиал</label>
+            <input type="text" class="form-control" formControlName="id_department">-->
+            <ng-select2 type="text" class="form-control" formControlName="id_rnu" placeholder="Филиал">
+              <option value="" disabled selected>Выберите тип</option>
+              <option placeholder="'Demo with options'" *ngFor="let us of readData1" [value]="us.id">
+                {{us.name_rnu}}
+              </option>
+            </ng-select2>
+
           </div>
           <div class="mb-3">
+<!--
             <label class="form-label">Отдел</label>
             <input type="text" class="form-control" formControlName="id_rnu">
+-->
+            <ng-select2 type="text" class="form-control" formControlName="id_department" placeholder="Отдел">
+              <option value="" disabled selected>Выберите тип</option>
+              <option placeholder="'Demo with options'" *ngFor="let us of readData2" [value]="us.id">
+                {{us.name_department}}
+              </option>
+            </ng-select2>
           </div>
           <div class="mb-3">
             <label class="form-label">Логин</label>

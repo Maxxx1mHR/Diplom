@@ -9,11 +9,15 @@ import {AddRepairEquipmentComponent} from "../modules/add-repair-equipment/add-r
 import {GalaxyComponent} from "../modules/galaxy/galaxy.component";
 import {LoginComponent} from "../modules/login/login.component";
 import {SignupComponent} from "../modules/signup/signup.component";
+import {NavComponent} from "../modules/nav/nav.component";
+import {CharacteristicComponent} from "../modules/characteristic/characteristic.component";
+import {AddCharacteristicComponent} from "../modules/add-characteristic/add-characteristic.component";
 
 
 const equipment: Routes = [
   {path: 'location', component: LocationEquipmentComponent},
   {path: 'repair', component: RepairEquipmentComponent},
+  {path: 'characteristic', component: CharacteristicComponent},
 ];
 
 
@@ -22,13 +26,15 @@ const routes: Routes = [
   {path: 'single-equipment/:id', component: SingleEquipmentComponent},
   {path: 'single-equipment/:id', component: SingleEquipmentComponent, children: equipment},
   {path: 'single-equipment/:id', component: SingleEquipmentComponent, children: equipment},
+  {path: 'single-equipment/:id', component: SingleEquipmentComponent, children: equipment},
   {path: 'add-location-equipment/:id', component: AddLocationEquipmentComponent},
   {path: 'add-repair-equipment/:id', component: AddRepairEquipmentComponent},
+  {path: 'add-characteristic/:id', component: AddCharacteristicComponent},
   {path: 'galaxy', component: GalaxyComponent},
   {path: 'galaxy/:id', component: GalaxyComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  //{path: '', redirectTo: 'login', pathMatch: 'full'},
 ];
 
 

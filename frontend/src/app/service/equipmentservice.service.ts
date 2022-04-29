@@ -16,7 +16,7 @@ export class EquipmentserviceService {
 
   //функция вывода информации об всем оборудовании
   getAllEquip(): Observable<any> {
-    return this._http.get('http://localhost:3000/all_equipment');
+    return this._http.get('http://localhost:3000/all_equipment', {withCredentials: true});
   }
 
   // getAllEquip(): Observable<any> {
@@ -112,10 +112,29 @@ export class EquipmentserviceService {
     return this._http.post('http://localhost:3000/add_in_allequipment_from_galaxy', data);
   }
 
-  postSignup(data: any): Observable<any>{
+/*  postSignup(data: any): Observable<any>{
     return this._http.post('http://localhost:3000/signup', data);
+  }*/
+
+  postRegistration(data: any): Observable<any>{
+    return this._http.post('http://localhost:3000/registration', data);
   }
 
+  postLogin(data: any): Observable<any>{
+    return this._http.post('http://localhost:3000/login', data, {withCredentials: true});
+  }
+
+  getRnu(): Observable<any>{
+    return this._http.get('http://localhost:3000/rnu');
+  }
+
+  getDepartments(): Observable<any>{
+    return this._http.get('http://localhost:3000/departments');
+  }
+
+  postLogout(data: any): Observable<any>{
+    return this._http.post('http://localhost:3000/logout', data, {withCredentials: true});
+  }
 
 
 

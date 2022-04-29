@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {EquipmentserviceService} from "../../service/equipmentservice.service";
 import {combineAll} from "rxjs/operators";
 import {ActivatedRoute} from "@angular/router";
+import {Emitters} from "../../emitters/emitters";
 
 
 //const itemPerPage: number = 2;
@@ -14,6 +15,8 @@ import {ActivatedRoute} from "@angular/router";
 
 export class AllEquipmentComponent implements OnInit {
 
+
+  message = false
   //public page: number;
     public collectionSize: number;
     public test: number;
@@ -54,6 +57,8 @@ export class AllEquipmentComponent implements OnInit {
       console.log(res, "resAllEquip==>");
       this.readData = res.data;
       this.totalLength = res.length;
+      this.message = true
+      Emitters.authEmitter.emit(true)
       //this.collectionSize = res.data[0].allCount;
     });
 

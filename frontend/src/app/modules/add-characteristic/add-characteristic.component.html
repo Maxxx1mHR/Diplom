@@ -1,0 +1,94 @@
+<div class="container mt-5" [ngSwitch]="test">
+
+  <ng-container *ngSwitchCase="1">
+
+  <h4>Характеристики моноблока</h4>
+  <form [formGroup]="">
+
+    <div class="col-lg-6 mt-2">
+      <input type="text" class="form-control" formControlName="price"
+             placeholder="Разрешение">
+    </div>
+
+    <div class="col-lg-6 mt-2">
+      <input type="text" class="form-control" formControlName="type_of_work"
+             placeholder="Диагональ">
+    </div>
+
+    <div class="col-lg-6 mt-2">
+      <input type="text" class="form-control" formControlName="type_of_work"
+             placeholder="Модель процессора">
+    </div>
+
+    <div class="col-lg-6 mt-2">
+      <input type="text" class="form-control" formControlName="type_of_work"
+             placeholder="Оперативная память">
+    </div>
+
+    <div class="col-lg-6 mt-2">
+      <input type="text" class="form-control" formControlName="type_of_work"
+             placeholder="Графический ускоритель">
+    </div>
+
+    <div class="col-lg-6 mt-2">
+      <input type="text" class="form-control" formControlName="type_of_work"
+             placeholder="Объем SSD">
+    </div>
+
+    <div class="col-lg-6 mt-2">
+      <input type="text" class="form-control" formControlName="type_of_work"
+             placeholder="Объем HDD">
+    </div>
+
+
+    <div class="col-lg-4 mt-2">
+      <button class="btn btn-primary">Добавить</button>
+    </div>
+  </form>
+</ng-container>
+
+
+  <ng-container *ngSwitchCase="2">
+
+    <h1>Характеристики монитора</h1>
+    <form [formGroup]="AddCharacteristic">
+
+      <table>
+        <thead>
+        <tr>
+          <th>Характеристики</th><th>Модель</th><th>Параметры</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Разрешение</td>
+          <td>
+            <input type="text" class="form-control" formControlName="model" placeholder="">
+          </td>
+          <td>
+            <input type="text" class="form-control" formControlName="parameter" placeholder="1920x1080/2560x1440/3840x2160">
+          </td>
+        </tr>
+
+        <tr>
+          <td>Диагональ</td>
+          <td>
+            <input type="text" class="form-control" formControlName="model" placeholder="">
+          </td>
+          <td>
+            <input type="text" class="form-control" formControlName="parameter" placeholder="Например: 24/27/32">
+          </td>
+        </tr>
+
+        </tbody>
+      </table>
+
+      <div class="col-lg-4 mt-2">
+        <button class="btn btn-primary" (click)="AddCharMonitor()">Добавить</button>
+      </div>
+
+    </form>
+
+  </ng-container>
+
+</div>

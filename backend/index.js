@@ -1,84 +1,35 @@
 const express = require('express');
 const bodyparser = require('body-parser');
 const cors = require('cors');
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 const passport = require('passport');
+const cookieParser = require('cookie-parser')
 
 const mysql = require('mysql2');
 const mssql = require('mssql');
 const {compileETag} = require("express/lib/utils");
 
-/*
-const Sequelize = require('sequelize')
+const {Staff} = require("./registration/index");
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const {validationResult} = require('express-validator')
+const {secret} = require("./registration/config")
+const {router} = require("express/lib/application");
 
-const sequelize = new Sequelize('diplom', 'root', 'root', {
-    host: 'localhost',
-    dialect: 'mysql',
-})
-
-sequelize.authenticate().then(() => {
-    console.log("Соединение удалоась Sequilize")
-}).catch((err) => {
-    console.log("Ошибка соединеия")
-})
-
-const initializePassport = require('./passport-config')
-initializePassport(
-    passport,
-    email => users.find(user => user.email === email),
-    id => users.find(user => user.id === id)
-)
-
-
-const Staff = sequelize.define(
-    'Staff',
-    {
-        id: {
-            type: Sequelize.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-            allowNull: true
-        },
-        family_name: {
-            type: Sequelize.CHAR,
-            allowNull: true
-        },
-        name: {
-            type: Sequelize.CHAR,
-            allowNull: true
-        },
-        dad_name: {
-            type: Sequelize.CHAR,
-            allowNull: true
-        },
-        id_department: {
-            type: Sequelize.INTEGER,
-            allowNull: true
-        },
-        id_rnu: {
-            type: Sequelize.INTEGER,
-            allowNull: true
-        },
-        login: {
-            type: Sequelize.CHAR,
-            allowNull: true
-        },
-        password: {
-            type: Sequelize.CHAR,
-            allowNull: true
-        }
-    },
-    {
-        timestamps: false
+const generateAccessToken = (id) => {
+    const payload = {
+        id
     }
-)
-*/
+    return jwt.sign(payload, secret)
+}
 
-
-//const {router} = require("express/lib/application");
 
 const app = express();
-app.use(cors());
+app.use(cookieParser())
+app.use(cors({
+    credentials: true,
+    origin: ['http://localhost:4200']
+}));
 app.use(bodyparser.json());
 app.use(express.urlencoded({extended: false}))
 
@@ -90,106 +41,23 @@ appGalaxy.use(bodyparser.json());
 // создаем парсер для данных в формате json ТЕСТ
 //const jsonParser = express.json();
 
+/*
 const registration = require('./registration')
 const Staff = registration.Staff
-
-
-const authRouter = require('./registration/authRouter')
-app.use('/auth',authRouter)
-
-
-/*
-Staff.sync({alter: true}).then(()=>{
-    let login = "Test"
-    let temp
-    return Staff.findOne({where: {login: login}})
-}).then((staff)=>{
-    temp = staff
-    console.log("ЛОГИН",staff.login)
-    console.log("ЛОГИН",temp.login)
-    if(temp){
-        console.log("Clone found")
-    }
-    else console.log("Insert")
-
-})
 */
 
-
-app.post('/test123', (req, res) => {
-//Staff.sync({alter: true}).then(()=>{
-
-    //const staff = Staff.build({login: 'test', password: '123'});
-    //return staff.save();
-    //console.log(staff);
-
-    /*
-        return Staff.findAll({attributes: ['login', 'password']});
-    }).then((data)=>{
-        data.forEach((element)=>{
-            if(login == 'test') {
-                console.log(element.toJSON());
-            }
-        })
-    })
-    */
-
-    try {
-        const login1 = req.body.login
-        const password = req.body.password
-
-        //return Staff.findOne({where: {login: login1}}).then((staff)=>{
-        //console.log(staff.login)
-
-        Staff.findOne({where: {login: login1}}).then((staff) => {
-            //console.log("Func", staff.login)
-            //return staff.login
-
-
-        if (staff) {
-            return res.status(400).json('Ошибка уже существует')
-        }
-        //console.log("Пользователь добавлен")
-            res.status(400).json({message: 'Пользователь добавлен'})
-        })
-
-
-    } catch (e) {
-        console.log(e)
-        res.status(400).json({message: 'Не удалось'})
-    }
-
-    /*
-            if (candidate==login1) {
-                console.log("КАНДИДАТ",candidate)
-                return res.status(400).json('Ошибка уже существует', candidate)
-            }
-
-            const staff = Staff.build({login: 'test', password: '123'});
-            //const staff = new Staff({login, password})
-            //staff.save()
-            console.log("КАНДИДАТ",candidate)
-            return res.json({message: 'Пользователь добавлен', candidate})
-
-        } catch (e) {
-            console.log(e)
-            res.status(400).json({message: 'Не удалось'})
-        }
-    */
-
-})
-
-
-//const users = []
-
+//const authRouter = require('./registration/authRouter')
+//app.use('/auth',authRouter)
 
 //Соединение с базой данных
-const db = mysql.createConnection({
+const db = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: 'root',
     database: 'diplom',
-    port: 3306
+    port: 3306, waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
 const dbGalaxy = new mssql.ConnectionPool({
@@ -203,7 +71,7 @@ const dbGalaxy = new mssql.ConnectionPool({
 
 
 //Проверка соединения с базой данных
-db.connect(err => {
+db.getConnection(err => {
     if (err) {
         console.log(err, 'Соединеие с MySQL не удалось, ошибка');
     } else {
@@ -248,52 +116,64 @@ appGalaxy.get("/galaxy_all_equipment", function (req, res) {
 //Вывод основной информаци об оборудовании:
 //Тип, производитель, модель, сериный, инвентарный, дата поставки.
 
-app.get('/all_equipment', (req, res) => {
+app.get('/all_equipment', async (req, res) => {
 
-    //console.log('test');
-    let qr = 'SELECT all_equipment.id,name_type_equipment, name_manufacturer, model, serial_number, inventory_number, delivery_date ' +
-        'FROM all_equipment, type_of_equipment, manufacturer ' +
-        'WHERE all_equipment.id_type_of_equipment = type_of_equipment.id ' +
-        'AND all_equipment.id_manufacturer = manufacturer.id';
-
-
-    const page = parseInt(req.query.page);
-    const limit = parseInt(req.query.limit);
-
-    const startIndex = (page - 1) * limit;
-    const endIndex = page * limit;
-
-    const results = {}
-
-    db.query(qr, (err, result) => {
-        if (err) {
-            console.log(err, 'err');
+    try {
+        const cookie = req.cookies['jwt']
+        const claims = jwt.verify(cookie, secret)
+        console.log(claims)
+        if (!claims) {
+            return res.status(400).json({message: 'Пользователь не авторизован'})
         }
-        //if (result.length > 0) {
-        else {
 
-            /*            if (endIndex < result.length)
-                            results.next = {
-                                page: page + 1,
-                                limit: limit
-                            }
+        //console.log('test');
+        let qr = 'SELECT all_equipment.id,name_type_equipment, name_manufacturer, model, serial_number, inventory_number, delivery_date ' +
+            'FROM all_equipment, type_of_equipment, manufacturer ' +
+            'WHERE all_equipment.id_type_of_equipment = type_of_equipment.id ' +
+            'AND all_equipment.id_manufacturer = manufacturer.id';
 
-                        if (startIndex > 0) {
-                            results.previous = {
-                                page: page - 1,
-                                limit: limit
-                            }
-                        }*/
 
-            //results.results = result.slice(startIndex, endIndex);
+        const page = parseInt(req.query.page);
+        const limit = parseInt(req.query.limit);
 
-            res.send({message: 'main info equipment', data: result});
-            //finalResult = result.slice(startIndex, endIndex);
-            //res.send({message: 'main info equipment', data: finalResult});
+        const startIndex = (page - 1) * limit;
+        const endIndex = page * limit;
 
-        }
-    });
-});
+        const results = {}
+
+        db.query(qr, (err, result) => {
+            if (err) {
+                console.log(err, 'err');
+            }
+            //if (result.length > 0) {
+            else {
+
+                /*            if (endIndex < result.length)
+                                results.next = {
+                                    page: page + 1,
+                                    limit: limit
+                                }
+
+                            if (startIndex > 0) {
+                                results.previous = {
+                                    page: page - 1,
+                                    limit: limit
+                                }
+                            }*/
+
+                //results.results = result.slice(startIndex, endIndex);
+
+                res.send({message: 'main info equipment', data: result})
+                //finalResult = result.slice(startIndex, endIndex);
+                //res.send({message: 'main info equipment', data: finalResult});
+            }
+        })
+
+
+    } catch (e) {
+        return res.status(400).json({message: 'Пользователь не авторизован'})
+    }
+})
 
 //Тест по выводу количества элементов для страничной навигации
 app.get('/all_equipmentCount', (req, res) => {
@@ -345,16 +225,16 @@ app.get('/all_equipment/:id', (req, res) => {
 //Вывод списка сотрудников
 //ФИО, отдел и филиал
 app.get('/staff', (req, res) => {
-    let qr = 'SELECT staff.id, family_name, name, dad_name, name_department, name_rnu, login, password ' +
-        'FROM staff, departments, rnu' +
-        ' WHERE staff.id_department = departments.id AND staff.id_rnu = rnu.id';
+    let qr = 'SELECT staffs.id, family_name, name, dad_name, name_department, name_rnu, login, password ' +
+        'FROM staffs, departments, rnu' +
+        ' WHERE staffs.id_department = departments.id AND staffs.id_rnu = rnu.id';
 
 
     db.query(qr, (err, result) => {
         if (err) {
             console.log(err, 'errs');
         }
-        if (result.length > 0) {
+        if (result) {
             res.send(
                 {message: 'single equipment data', data: result});
         } else {
@@ -369,8 +249,8 @@ app.get('/staff/:id', (req, res) => {
 
     let gId = req.params.id;
     let qr = 'SELECT family_name, name, dad_name, name_department, name_rnu ' +
-        'FROM staff, departments, rnu' +
-        ' WHERE staff.id_department = departments.id AND staff.id_rnu = rnu.id AND staff.id = ' + gId + '';
+        'FROM staffs, departments, rnu' +
+        ' WHERE staffs.id_department = departments.id AND staffs.id_rnu = rnu.id AND staffs.id = ' + gId + '';
 
     db.query(qr, (err, result) => {
         if (err) {
@@ -391,12 +271,12 @@ app.get('/location_of_equipment/:id', (req, res) => {
 
     let gId = req.params.id;
     let qr = 'SELECT all_equipment.id, serial_number, date, name_operation, name_rnu, name_department, family_name, name, dad_name' +
-        ' FROM all_equipment, location_of_equipment, type_of_operation, staff, rnu, departments' +
+        ' FROM all_equipment, location_of_equipment, type_of_operation, staffs, rnu, departments' +
         ' WHERE all_equipment.id = location_of_equipment.id_all_equipment ' +
         'AND location_of_equipment.id_type_of_operation = type_of_operation.id' +
-        ' AND location_of_equipment.id_staff = staff.id ' +
-        'AND staff.id_rnu =rnu.id ' +
-        'AND staff.id_department = departments.id ' +
+        ' AND location_of_equipment.id_staff = staffs.id ' +
+        'AND staffs.id_rnu =rnu.id ' +
+        'AND staffs.id_department = departments.id ' +
         'AND all_equipment.id = ' + gId + '';
 
     db.query(qr, (err, result) => {
@@ -530,6 +410,38 @@ app.get('/manufacturer', (req, res) => {
     });
 });
 
+app.get('/departments', (req, res) => {
+
+    let qr = `SELECT id, name_department FROM departments`;
+    db.query(qr, (err, result) => {
+        if (err, 'Error') {
+            console.log(err, 'errs');
+        }
+        if (result) {
+            res.send({
+                message: 'get departments',
+                data: result
+            });
+        }
+    });
+});
+
+app.get('/rnu', (req, res) => {
+
+    let qr = `SELECT id, name_rnu FROM rnu`;
+    db.query(qr, (err, result) => {
+        if (err, 'Error') {
+            console.log(err, 'errs');
+        }
+        if (result) {
+            res.send({
+                message: 'get rnu',
+                data: result
+            });
+        }
+    });
+});
+
 appGalaxy.get("/galaxy_single_equipment/:id", function (req, res) {
 
     let gId = req.params.id;
@@ -601,7 +513,7 @@ app.post('/add_in_allequipment_from_galaxy', (req, res) => {
 
 //Блок для регистрации
 
-app.post('/signup', async (req, res) => {
+/*app.post('/signup', async (req, res) => {
     try {
         let family_name = req.body.family_name;
         let name = req.body.name;
@@ -625,7 +537,143 @@ app.post('/signup', async (req, res) => {
     } catch {
         res.redirect('/signup');
     }
-});
+});*/
+
+app.get('/get_id_type_of_equipment/:id', (req, res) => {
+    let gId = req.params.id;
+    let qr = `SELECT id_type_of_equipment FROM all_equipment WHERE id = ${gId}`
+    db.query(qr, (err, result) => {
+        if (err) {
+            return res.send({message: "Ошибка"})
+        }
+        if (result) {
+            res.send({
+                message: "Данные получены",
+                data: result
+            })
+        }
+    })
+})
+
+app.get('/get_characteristic/:id', (req, res) => {
+    let gId = req.params.id
+    let qr = `SELECT characteristic.id, characteristic_type.name, characteristic.model, characteristic.parameter
+                FROM characteristic, all_equipment, characteristic_type
+                WHERE characteristic.id_all_equipment = all_equipment.id
+                AND characteristic.id_characteristic_type = characteristic_type.id
+                AND all_equipment.id = ${gId} ORDER BY characteristic.id`
+
+    db.query(qr, (err, result) => {
+        if (err) {
+            console.log(err, "Ошибка")
+        }
+        if (result.length > 0) {
+            res.send({
+                message: "Данные получены",
+                data: result
+            })
+        } else {
+            console.log("Пустой запрос")
+            res.send({
+                message: "Пустой запрос"
+            })
+        }
+    })
+})
+
+app.post('/add-characteristicMonitor/:id', (req,res)=>{
+
+    let gId = req.params.id
+    let model = req.body.model
+    let parameter = req.body.parameter
+
+    let qr = `INSERT INTO characteristic (id_all_equipment, id_characteristic_type, model, parameter)
+                VALUES ('${gId}', '8' , '${model}' , '${parameter}'), 
+                ('${gId}', '9' , '${model}' , '${parameter}')`
+    db.query(qr, (err,result)=>{
+
+        if(err){
+            console.log(err,'errs')
+        }
+        if(result){
+            console.log(result, 'result')
+            res.send({
+                message: "Успешнно",
+            })
+        }
+    })
+})
+
+
+app.post('/registration', async (req, res) => {
+    try {
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            return res.status(400).json({message: "Ошибка при регистрации", errors})
+        }
+        const family_name = req.body.family_name
+        const name = req.body.name
+        const dad_name = req.body.dad_name
+        const id_department = req.body.id_department
+        const id_rnu = req.body.id_rnu
+        const login = req.body.login
+        const password = req.body.password
+        Staff.findOne({where: {login: login}}).then((candidate) => {
+            if (candidate) {
+                return res.status(400).json({message: 'Ошибка уже существует'})
+            }
+            //console.log("Пользователь добавлен")
+            //Добавить синхронизацию с БД???
+            const hasPassword = bcrypt.hashSync(password, 10)
+            const staff = new Staff({family_name, name, dad_name, id_department, id_rnu, login, password: hasPassword})
+            staff.save()
+            res.send({message: 'Пользователь добавлен'})
+        })
+
+    } catch (e) {
+        console.log(e)
+        res.status(400).json({message: 'Не удалось'})
+    }
+})
+
+app.post('/login', async (req, res) => {
+    try {
+        const login = req.body.login
+        const password = req.body.password
+        Staff.findOne({where: {login: login}}).then((user) => {
+            console.log(password)
+            console.log(user)
+            if (!user) {
+                return res.status(400).json({message: `Пользователь ${user} не найден`})
+            }
+            const validPassword = bcrypt.compareSync(password, user.password)
+            console.log(password)
+            console.log(user.password)
+            if (!validPassword) {
+                return res.status(400).json({message: 'Введен неверный пароль'})
+            }
+            const token = generateAccessToken(user.id)
+
+            res.cookie('jwt', token, {
+                httpOnly: true,
+                maxAge: 24 * 60 * 60 * 1000 //1 day
+            })
+            res.send({message: 'Успешно'})
+            //return res.json({token})
+        })
+
+    } catch (e) {
+        console.log(e)
+        res.status(400).json({message: 'Не удалось'})
+    }
+})
+
+app.post('/logout', async (req, res) => {
+    res.cookie('jwt', '', {maxAge: 0})
+    res.send({
+        message: 'Куки удалены'
+    })
+})
 
 
 app.listen(3000, () => {
