@@ -1,7 +1,22 @@
 <h1 *ngIf="message == false">Вы не авторизованы</h1>
+
 <div class="container mt-5" *ngIf="message">
 
-  <table class="table" >
+  <form [formGroup]="SearchForm">
+  <div class="row g-3 align-items-center">
+    <div class="col-md-3">
+      <input type="text" class="form-control" formControlName="search" placeholder="Инвентарный или серийный номер">
+    </div>
+    <div class="col-md-3">
+      <button class="btn btn-outline-success" (click)="Search()">Найти</button>
+      <button class="btn btn-outline-danger" type="reset" (click)="CleanSearch()">Очистить</button>
+    </div>
+  </div>
+  </form>
+
+
+  <div *ngIf="!searchData">
+  <table class="table">
     <thead>
     <tr>
 
@@ -16,9 +31,8 @@
     </thead>
     <tbody>
 
-
-    <tr id = "tr" *ngFor="let us of readData |
-     paginate: { itemsPerPage: 8,
+    <tr  id = "tr" *ngFor="let us of readData |
+     paginate: { itemsPerPage: 4,
                       currentPage: page,
                       totalItems: totalLength
       }"
@@ -40,6 +54,50 @@
                        nextLabel="Вперед"
 
   ></pagination-controls>
+  </div>
+
+
+      <div *ngIf="searchData">
+      <table class="table">
+        <thead>
+        <tr>
+
+          <th scope="col">id</th>
+          <th scope="col">Тип</th>
+          <th scope="col">Производитель</th>
+          <th scope="col">Модель</th>
+          <th scope="col">Инвентарный номер</th>
+          <th scope="col">Серийный номер</th>
+          <th scope="col">Дата поставки</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr id = "tr" *ngFor="let us of searchData  |
+     paginate: { itemsPerPage: 4,
+                      currentPage: page,
+                      totalItems: totalLength
+      }" [routerLink]="['/single-equipment/' + us.id]">
+
+          <td>{{us.id}}</td>
+          <td>{{us.name_type_equipment}}</td>
+          <td>{{us.name_manufacturer}}</td>
+          <td>{{us.model}}</td>
+          <td>{{us.inventory_number}}</td>
+          <td>{{us.serial_number}}</td>
+          <td>{{us.delivery_date  | date: 'dd/MM/yyyy'}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <pagination-controls class="text-center"
+                           (pageChange)="page = $event"
+                           previousLabel="Назад"
+                           nextLabel="Вперед"
+      ></pagination-controls>
+    </div>
+
+
+
 
 
   <!--

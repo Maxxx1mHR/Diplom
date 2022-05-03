@@ -3,6 +3,8 @@ import {EquipmentserviceService} from "../../service/equipmentservice.service";
 import {combineAll} from "rxjs/operators";
 import {ActivatedRoute} from "@angular/router";
 import {Emitters} from "../../emitters/emitters";
+import {HttpClient} from "@angular/common/http";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 
 //const itemPerPage: number = 2;
@@ -26,7 +28,7 @@ export class AllEquipmentComponent implements OnInit {
 
 
 
-  constructor(private service: EquipmentserviceService) {
+  constructor(private service: EquipmentserviceService, private _http: HttpClient) {
 
     //this.test = 4
 
@@ -40,6 +42,7 @@ export class AllEquipmentComponent implements OnInit {
   readData: any;
   readData2: any;
   readData3: any;
+  searchData: any
 
   ngOnInit(): void {
 /*    this.getAllEquip();
@@ -84,8 +87,27 @@ export class AllEquipmentComponent implements OnInit {
 
   onPageChanged(pageNumber: number){
     console.log("page Changed" + pageNumber);
-
   }
+
+  SearchForm: FormGroup = new FormGroup({
+    'search': new FormControl('', Validators.required)
+  })
+
+  Search(){
+    this._http.post('http://localhost:3000/search_in_all_equipment', this.SearchForm.value).subscribe((res:any)=>{
+      console.log(this.SearchForm.value)
+      console.log(res, "SearchEquip")
+      this.searchData = res.data
+      console.log(this.searchData, '999')
+    })
+  }
+
+  CleanSearch(){
+    this.searchData = null
+  }
+
+
+
 
 
 }

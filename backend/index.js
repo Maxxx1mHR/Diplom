@@ -130,7 +130,7 @@ app.get('/all_equipment', async (req, res) => {
         let qr = 'SELECT all_equipment.id,name_type_equipment, name_manufacturer, model, serial_number, inventory_number, delivery_date ' +
             'FROM all_equipment, type_of_equipment, manufacturer ' +
             'WHERE all_equipment.id_type_of_equipment = type_of_equipment.id ' +
-            'AND all_equipment.id_manufacturer = manufacturer.id';
+            'AND all_equipment.id_manufacturer = manufacturer.id ORDER BY all_equipment.id';
 
 
         const page = parseInt(req.query.page);
@@ -584,12 +584,14 @@ app.get('/get_characteristic/:id', (req, res) => {
 app.post('/add-characteristicMonitor/:id', (req,res)=>{
 
     let gId = req.params.id
-    let model = req.body.model
-    let parameter = req.body.parameter
+    let model1 = req.body.model1
+    let parameter1 = req.body.parameter1
+    let model2 = req.body.model2
+    let parameter2 = req.body.parameter2
 
     let qr = `INSERT INTO characteristic (id_all_equipment, id_characteristic_type, model, parameter)
-                VALUES ('${gId}', '8' , '${model}' , '${parameter}'), 
-                ('${gId}', '9' , '${model}' , '${parameter}')`
+                VALUES ('${gId}', '8' , '${model1}' , '${parameter1}'), 
+                ('${gId}', '9' , '${model2}' , '${parameter2}')`
     db.query(qr, (err,result)=>{
 
         if(err){
@@ -603,6 +605,70 @@ app.post('/add-characteristicMonitor/:id', (req,res)=>{
         }
     })
 })
+
+app.post('/add-characteristicMonoblock/:id', (req,res)=>{
+
+    let gId = req.params.id
+    let model1 = req.body.model1
+    let parameter1 = req.body.parameter1
+    let model2 = req.body.model2
+    let parameter2 = req.body.parameter2
+    let model3 = req.body.model3
+    let parameter3 = req.body.parameter3
+    let model4 = req.body.model4
+    let parameter4 = req.body.parameter4
+    let model5 = req.body.model5
+    let parameter5 = req.body.parameter5
+    let model6 = req.body.model6
+    let parameter6 = req.body.parameter6
+    let model7 = req.body.model7
+    let parameter7 = req.body.parameter7
+
+
+    let qr = `INSERT INTO characteristic (id_all_equipment, id_characteristic_type, model, parameter)
+               VALUES ('${gId}', '1', '${model1}','${parameter1}'),
+                      ('${gId}', '2', '${model2}','${parameter2}'),
+                      ('${gId}', '3', '${model3}','${parameter3}'),
+                      ('${gId}', '4', '${model4}','${parameter4}'),
+                      ('${gId}', '5', '${model5}','${parameter5}'),
+                      ('${gId}', '6', '${model6}','${parameter6}'),
+                      ('${gId}', '7', '${model7}','${parameter7}')`
+    db.query(qr, (err,result)=>{
+        if(err){
+            console.log(err,"Ошибка")
+        }
+        if(result){
+            console.log(result,"Успешно")
+            res.send({
+                message: "Успешно"
+            })
+        }
+    })
+})
+
+
+app.post('/search_in_all_equipment', (req,res)=>{
+    let search = req.body.search
+    let qr = `SELECT all_equipment.id,name_type_equipment, name_manufacturer, model, serial_number, inventory_number, delivery_date
+                FROM all_equipment, type_of_equipment, manufacturer 
+                 WHERE all_equipment.id_type_of_equipment = type_of_equipment.id 
+                 AND all_equipment.id_manufacturer = manufacturer.id
+                 AND all_equipment.inventory_number LIKE '%${search}%' OR serial_number LIKE '%${search}%' ORDER BY all_equipment.id`
+
+    db.query(qr, (err,result)=>{
+        if(err){
+            console.log(err,"Ошибка")
+        }
+        if(result){
+            console.log(result,"Успешно")
+            res.send({
+                message: "Успешно",
+                data: result
+            })
+        }
+    })
+})
+
 
 
 app.post('/registration', async (req, res) => {

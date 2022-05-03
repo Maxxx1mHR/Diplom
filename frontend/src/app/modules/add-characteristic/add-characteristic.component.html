@@ -2,50 +2,96 @@
 
   <ng-container *ngSwitchCase="1">
 
-  <h4>Характеристики моноблока</h4>
-  <form [formGroup]="">
+    <h4>Характеристики моноблока</h4>
+    <form [formGroup]="AddCharacteristic">
+      <table>
+        <thead>
+        <tr>
+          <th>Характеристики</th>
+          <th>Модель</th>
+          <th>Параметры</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Разрешение</td>
+          <td>
+            <input type="text" class="form-control" formControlName="model1" placeholder="">
+          </td>
+          <td>
+            <input type="text" class="form-control" formControlName="parameter1"
+                   placeholder="1920x1080/2560x1440/3840x2160">
+          </td>
+        </tr>
 
-    <div class="col-lg-6 mt-2">
-      <input type="text" class="form-control" formControlName="price"
-             placeholder="Разрешение">
-    </div>
+        <tr>
+          <td>Диагональ</td>
+          <td>
+            <input type="text" class="form-control" formControlName="model2" placeholder="">
+          </td>
+          <td>
+            <input type="text" class="form-control" formControlName="parameter2" placeholder="Например: 24/27/32">
+          </td>
+        </tr>
 
-    <div class="col-lg-6 mt-2">
-      <input type="text" class="form-control" formControlName="type_of_work"
-             placeholder="Диагональ">
-    </div>
+        <tr>
+          <td>Модель процессора</td>
+          <td>
+            <input type="text" class="form-control" formControlName="model3" placeholder="Например: Intel Core i7-12700k/i5-12600">
+          </td>
+          <td>
+            <input type="text" class="form-control" formControlName="parameter3" placeholder="Например: 3.7 ГГц/2.5 ГГц">
+          </td>
+        </tr>
 
-    <div class="col-lg-6 mt-2">
-      <input type="text" class="form-control" formControlName="type_of_work"
-             placeholder="Модель процессора">
-    </div>
+        <tr>
+          <td>Оперативная память</td>
+          <td>
+            <input type="text" class="form-control" formControlName="model4" placeholder="Например: Kingston/A-Data">
+          </td>
+          <td>
+            <input type="text" class="form-control" formControlName="parameter4" placeholder="Например: DDR4/DDR3, 16Гб/8Гб">
+          </td>
+        </tr>
 
-    <div class="col-lg-6 mt-2">
-      <input type="text" class="form-control" formControlName="type_of_work"
-             placeholder="Оперативная память">
-    </div>
+        <tr>
+          <td>Графический ускоритель</td>
+          <td>
+            <input type="text" class="form-control" formControlName="model5" placeholder="Например: MSI/Palit/ASUS">
+          </td>
+          <td>
+            <input type="text" class="form-control" formControlName="parameter5" placeholder="Например: 16Гб/8Гб">
+          </td>
+        </tr>
 
-    <div class="col-lg-6 mt-2">
-      <input type="text" class="form-control" formControlName="type_of_work"
-             placeholder="Графический ускоритель">
-    </div>
+        <tr>
+          <td>Объем SSD</td>
+          <td>
+            <input type="text" class="form-control" formControlName="model6" placeholder="Например: SATA/M2, A-Data/HP">
+          </td>
+          <td>
+            <input type="text" class="form-control" formControlName="parameter6" placeholder="Например: 256Гб/512Гб">
+          </td>
+        </tr>
 
-    <div class="col-lg-6 mt-2">
-      <input type="text" class="form-control" formControlName="type_of_work"
-             placeholder="Объем SSD">
-    </div>
+        <tr>
+          <td>Объем HDD</td>
+          <td>
+            <input type="text" class="form-control" formControlName="model7" placeholder="Например: Seagate/WD/Toshiba">
+          </td>
+          <td>
+            <input type="text" class="form-control" formControlName="parameter7" placeholder="Например: 1TБ/2ТБ">
+          </td>
+        </tr>
+        </tbody>
+      </table>
 
-    <div class="col-lg-6 mt-2">
-      <input type="text" class="form-control" formControlName="type_of_work"
-             placeholder="Объем HDD">
-    </div>
+      <div class="col-lg-4 mt-2">
+        <button class="btn btn-primary" (click)="AddCharMonoblock()">Добавить</button>
+      </div>
 
-
-    <div class="col-lg-4 mt-2">
-      <button class="btn btn-primary">Добавить</button>
-    </div>
-  </form>
-</ng-container>
+    </form>
+  </ng-container>
 
 
   <ng-container *ngSwitchCase="2">
@@ -56,27 +102,30 @@
       <table>
         <thead>
         <tr>
-          <th>Характеристики</th><th>Модель</th><th>Параметры</th>
+          <th>Характеристики</th>
+          <th>Модель</th>
+          <th>Параметры</th>
         </tr>
         </thead>
         <tbody>
         <tr>
           <td>Разрешение</td>
           <td>
-            <input type="text" class="form-control" formControlName="model" placeholder="">
+            <input type="text" class="form-control" formControlName="model1" placeholder="">
           </td>
           <td>
-            <input type="text" class="form-control" formControlName="parameter" placeholder="1920x1080/2560x1440/3840x2160">
+            <input type="text" class="form-control" formControlName="parameter1"
+                   placeholder="1920x1080/2560x1440/3840x2160">
           </td>
         </tr>
 
         <tr>
           <td>Диагональ</td>
           <td>
-            <input type="text" class="form-control" formControlName="model" placeholder="">
+            <input type="text" class="form-control" formControlName="model2" placeholder="">
           </td>
           <td>
-            <input type="text" class="form-control" formControlName="parameter" placeholder="Например: 24/27/32">
+            <input type="text" class="form-control" formControlName="parameter2" placeholder="Например: 24/27/32">
           </td>
         </tr>
 

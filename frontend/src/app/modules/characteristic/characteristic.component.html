@@ -34,7 +34,7 @@
       </tr>
       </tbody>
     </table>
-    <a [routerLink]="['/add-characteristic/'+ getparamid]" class="btn btn-success"> <i class="bi bi-plus-circle"></i>Добавить запись</a>
+    <a *ngIf="!monitor" [routerLink]="['/add-characteristic/'+ getparamid]" class="btn btn-success"> <i class="bi bi-plus-circle"></i>Добавить запись</a>
 
   </ng-container>
 
@@ -53,8 +53,9 @@
         <td>{{us.parameter}}</td>
       </tr>
       </tbody>
-      <a [routerLink]="['/add-characteristic/'+ getparamid]" class="btn btn-success"> <i class="bi bi-plus-circle"></i>Добавить запись</a>
 
+      <!--Условие ngIf нужно, если записей нет, тогда выводим кнопку, если запись есть, тогда уже характеристики созданы-->
+      <a *ngIf="!monitor" [routerLink]="['/add-characteristic/'+ getparamid]" class="btn btn-success"> <i class="bi bi-plus-circle"></i>Добавить запись</a>
 
     </table>
   </ng-template>
